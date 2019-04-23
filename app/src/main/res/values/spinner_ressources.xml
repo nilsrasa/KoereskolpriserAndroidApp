@@ -17,4 +17,10 @@
         <item>D1E</item>
         <item>DE</item>
     </string-array>
+
+    <string-array name="priser">
+        <item>8.000 - 10.000</item>
+        <item>10.000 - 12.000</item>
+        <item>12.000 - 14.000</item>
+    </string-array>
 </resources>

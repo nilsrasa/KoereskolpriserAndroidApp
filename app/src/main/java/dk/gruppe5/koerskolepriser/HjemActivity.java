@@ -1,5 +1,6 @@
 package dk.gruppe5.koerskolepriser;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -39,14 +40,18 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         sp_type.setAdapter(adapter);
 
         sp_pris = findViewById(R.id.sp_hjem_pris);
-
+        adapter = ArrayAdapter.createFromResource(this,
+                R.array.priser, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_pris.setAdapter(adapter);
 
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_hjem_login){
-            //TODO: skift til login aktiviteten
+            Intent i = new Intent(this,LoginActivity.class);
+            startActivity(i);
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
             //TODO: start søgning og skift aktivitet
