@@ -2,9 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
+    android:background="@color/hvid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="dk.gruppe5.koerskolepriser.LoggetIndActivity"
+    tools:context="dk.gruppe5.koerskolepriser.aktiviteter.LoggetIndActivity"
     tools:layout_editor_absoluteY="25dp">
 
     <LinearLayout
@@ -26,8 +27,9 @@
             android:gravity="center"
             android:text="Test"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:textColor="@color/sort"
-            android:textSize="14sp"
+            android:textSize="35sp"
             android:textStyle="bold" />
 
 

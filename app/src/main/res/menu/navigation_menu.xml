@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_hjem"
+        android:id="@+id/navigation_mineTilbud"
         android:title="Mine Tilbud" />
 
     <item
-        android:id="@+id/navigation_moedeoversigt"
+        android:id="@+id/navigation_OpretTilbud"
         android:title="Opret Tilbud" />
 
     <item

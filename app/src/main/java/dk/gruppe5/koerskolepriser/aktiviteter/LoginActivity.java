@@ -1,4 +1,4 @@
-package dk.gruppe5.koerskolepriser;
+package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import dk.gruppe5.koerskolepriser.R;
+import dk.gruppe5.koerskolepriser.aktiviteter.LoggetIndActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 

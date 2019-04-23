@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".aktiviteter.LoginActivity">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -38,7 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
-            android:paddingTop="10dp"
+            android:paddingTop="20dp"
             android:text="Brugernavn"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -50,7 +50,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:paddingLeft="10dp"
-            android:text="Brugernavn..." />
+            android:hint="Brugernavn..." />
 
         <TextView
             android:id="@+id/tvPassword"
@@ -69,13 +69,13 @@
             android:ems="10"
             android:paddingLeft="10dp"
             android:inputType="textPersonName"
-            android:text="Password..." />
+            android:hint="Password..." />
 
         <Button
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="60dp"
             android:background="@android:color/holo_green_light"
             android:text="Log ind"
             android:textAllCaps="true"
