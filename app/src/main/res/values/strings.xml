@@ -3,4 +3,8 @@
     <string name="soeg">Søg</string>
     <string name="flere_filtre">flere filtre..</string>
     <string name="login">Login som køreskole</string>
+    <string name="find">Find køreskoler</string>
+    <string name="type">Type kørekort</string>
+    <string name="postnummer">Postnummer:</string>
+    <string name="pris">Pris:</string>
 </resources>
