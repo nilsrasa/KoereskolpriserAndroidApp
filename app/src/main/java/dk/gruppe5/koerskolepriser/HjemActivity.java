@@ -3,6 +3,8 @@ package dk.gruppe5.koerskolepriser;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -11,7 +13,8 @@ import android.widget.TextView;
 
 public class HjemActivity extends AppCompatActivity implements View.OnClickListener {
     //private Button btn_søg, btn_login;
-    //private TextView txt_filtre;
+    private TextView txt_filtre;
+    private View layout_extra;
     //private Spinner sp_pris, sp_type;
 
     @Override
@@ -28,8 +31,11 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         btn_søg.setOnClickListener(this);
 
         //Text
-        TextView txt_filtre = findViewById(R.id.txt_hjem_filtre);
+        txt_filtre = findViewById(R.id.txt_hjem_filtre);
         txt_filtre.setOnClickListener(this);
+        SpannableString content = new SpannableString(getText(R.string.flere_filtre));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        txt_filtre.setText(content);
 
         //Spinners
         Spinner sp_pris, sp_type;
@@ -45,19 +51,23 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_pris.setAdapter(adapter);
 
+        //Extra
+        layout_extra = findViewById(R.id.layout_hjem_extra);
+        layout_extra.setVisibility(View.GONE);
+
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_hjem_login){
-            Intent i = new Intent(this,LoginActivity.class);
+            Intent i = new Intent(this, LoginActivity.class);
             startActivity(i);
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
             //TODO: start søgning og skift aktivitet
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
-            //TODO: vis de resterende filtre
+            layout_extra.setVisibility(View.VISIBLE);
         }
     }
 }

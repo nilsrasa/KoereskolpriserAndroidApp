@@ -4,7 +4,13 @@
     <string name="flere_filtre">flere filtre..</string>
     <string name="login">Login som køreskole</string>
     <string name="find">Find køreskoler</string>
-    <string name="type">Type kørekort</string>
+    <string name="type">Type kørekort:</string>
     <string name="postnummer">Postnummer:</string>
     <string name="pris">Pris:</string>
+    <string name="koen">Køn:</string>
+    <string name="mand">Mand</string>
+    <string name="kvinde">Kvinde</string>
+    <string name="stoerrelse">Størrelse:</string>
+    <string name="dage">Ønskede dage:</string>
+    <string name="maerke">Bilmærke</string>
 </resources>

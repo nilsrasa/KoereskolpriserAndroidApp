@@ -27,7 +27,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:orientation="vertical"
-        android:padding="8dp"
+        android:animateLayoutChanges="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
             android:text="@string/postnummer" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/etxt_hjem_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -67,6 +67,72 @@
             android:id="@+id/sp_hjem_pris"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/layout_hjem_extra"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_hjem_koen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/koen" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/cbox_hjem_mand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/mand" />
+
+                <CheckBox
+                    android:id="@+id/cbox_hjem_kvinde"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/kvinde" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txt_hjem_maerke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/maerke" />
+
+            <Spinner
+                android:id="@+id/sp_hjem_maerke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txt_hjem_stoerrelse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/stoerrelse" />
+
+            <Spinner
+                android:id="@+id/sp_hjem_stoerrelse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/txt_hjem_dage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dage" />
+
+            <Spinner
+                android:id="@+id/sp_hjem_dage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </LinearLayout>
 
     <Button
@@ -85,7 +151,10 @@
         android:id="@+id/txt_hjem_filtre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="@string/flere_filtre"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintEnd_toEndOf="@+id/linearLayout"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
