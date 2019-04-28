@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragmenter.OpretTilbudFragment">
+    tools:context=".aktiviteter.HjemActivity">
 
     <TextView
-        android:id="@+id/txt_opretTilbud_titel"
+        android:id="@+id/txt_hjem_titel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:text="@string/find"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -25,56 +26,63 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
-        android:orientation="vertical"
         android:animateLayoutChanges="true"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/btn_opretTilbud_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_opretTilbud_type"
+            android:id="@+id/txt_hjem_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/type" />
 
         <Spinner
-            android:id="@+id/sp_opretTilbud_type"
+            android:id="@+id/sp_hjem_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/txt_opretTilbud_post"
+            android:id="@+id/txt_hjem_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/postnummer" />
 
         <EditText
-            android:id="@+id/etxt_opretTilbud_post"
+            android:id="@+id/etxt_hjem_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txt_opretTilbud_pris"
+            android:id="@+id/txt_hjem_pris"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pris" />
 
         <Spinner
-            android:id="@+id/sp_opretTilbud_pris"
+            android:id="@+id/sp_hjem_pris"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:id="@+id/layout_opretTilbud_extra"
+            android:id="@+id/layout_hjem_extra"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <CheckBox
+                android:id="@+id/cbox_hjem_lyn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lynkursus" />
+
             <TextView
-                android:id="@+id/txt_opretTilbud_koen"
+                android:id="@+id/txt_hjem_koen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/koen" />
@@ -85,14 +93,14 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cbox_opretTilbud_mand"
+                    android:id="@+id/cbox_hjem_mand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/mand" />
 
                 <CheckBox
-                    android:id="@+id/cbox_opretTilbud_kvinde"
+                    android:id="@+id/cbox_hjem_kvinde"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -100,37 +108,38 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/txt_opretTilbud_maerke"
+                android:id="@+id/txt_hjem_maerke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/maerke" />
 
             <Spinner
-                android:id="@+id/sp_opretTilbud_maerke"
+                android:id="@+id/sp_hjem_maerke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/txt_opretTilbud_stoerrelse"
+                android:id="@+id/txt_hjem_stoerrelse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/stoerrelse" />
 
             <Spinner
-                android:id="@+id/sp_opretTilbud_stoerrelse"
+                android:id="@+id/sp_hjem_stoerrelse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/txt_opretTilbud_dage"
+                android:id="@+id/txt_hjem_dage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ledige dage:" />
+                android:text="@string/dage" />
 
             <Spinner
-                android:id="@+id/sp_opretTilbud_dage"
+                android:id="@+id/sp_hjem_dage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
     </LinearLayout>
 
