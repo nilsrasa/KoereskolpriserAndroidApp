@@ -7,7 +7,7 @@
     tools:context=".aktiviteter.HjemActivity">
 
     <TextView
-        android:id="@+id/txt_hjem_titel"
+        android:id="@+id/txt_opret_titel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -34,24 +34,24 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_hjem_type"
+            android:id="@+id/txt_opret_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/type" />
 
         <Spinner
-            android:id="@+id/sp_hjem_type"
+            android:id="@+id/sp_opret_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/txt_hjem_post"
+            android:id="@+id/txt_opret_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/postnummer" />
 
         <EditText
-            android:id="@+id/etxt_hjem_post"
+            android:id="@+id/etxt_opret_post"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -59,30 +59,30 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/txt_hjem_pris"
+            android:id="@+id/txt_opret_pris"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/pris" />
 
         <Spinner
-            android:id="@+id/sp_hjem_pris"
+            android:id="@+id/sp_opret_pris"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:id="@+id/layout_hjem_extra"
+            android:id="@+id/layout_opret_extra"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
             <CheckBox
-                android:id="@+id/cbox_hjem_lyn"
+                android:id="@+id/cbox_opret_lyn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/lynkursus" />
 
             <TextView
-                android:id="@+id/txt_hjem_koen"
+                android:id="@+id/txt_opret_koen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/koen" />
@@ -93,14 +93,14 @@
                 android:orientation="horizontal">
 
                 <CheckBox
-                    android:id="@+id/cbox_hjem_mand"
+                    android:id="@+id/cbox_opret_mand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/mand" />
 
                 <CheckBox
-                    android:id="@+id/cbox_hjem_kvinde"
+                    android:id="@+id/cbox_opret_kvinde"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -108,35 +108,35 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/txt_hjem_maerke"
+                android:id="@+id/txt_opret_maerke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/maerke" />
 
             <Spinner
-                android:id="@+id/sp_hjem_maerke"
+                android:id="@+id/sp_opret_maerke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/txt_hjem_stoerrelse"
+                android:id="@+id/txt_opret_stoerrelse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/stoerrelse" />
 
             <Spinner
-                android:id="@+id/sp_hjem_stoerrelse"
+                android:id="@+id/sp_opret_stoerrelse"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/txt_hjem_dage"
+                android:id="@+id/txt_opret_dage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dage" />
 
             <Spinner
-                android:id="@+id/sp_hjem_dage"
+                android:id="@+id/sp_opret_dage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
