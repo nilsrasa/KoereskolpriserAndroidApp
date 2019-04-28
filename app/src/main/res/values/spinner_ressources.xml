@@ -23,4 +23,28 @@
         <item>10.000 - 12.000</item>
         <item>12.000 - 14.000</item>
     </string-array>
+
+    <string-array name="mærker">
+        <item>BMW</item>
+        <item>Audi</item>
+        <item>Toyota</item>
+        <item>Ford</item>
+        <item>Wolkswagen</item>
+    </string-array>
+
+    <string-array name="sørrelse">
+        <item>Lille</item>
+        <item>Mellem</item>
+        <item>Stor</item>
+    </string-array>
+
+    <string-array name="ønskedage">
+        <item>Mandag</item>
+        <item>Tirsdag</item>
+        <item>Onsdag</item>
+        <item>Torsdag</item>
+        <item>Fredag</item>
+        <item>Lørdag</item>
+        <item>Søndag</item>
+    </string-array>
 </resources>

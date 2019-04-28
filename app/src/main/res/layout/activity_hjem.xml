@@ -55,7 +55,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_hjem_pris"
@@ -73,6 +74,12 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <CheckBox
+                android:id="@+id/cbox_hjem_lyn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lynkursus" />
 
             <TextView
                 android:id="@+id/txt_hjem_koen"
@@ -132,6 +139,7 @@
                 android:id="@+id/sp_hjem_dage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
     </LinearLayout>
 
