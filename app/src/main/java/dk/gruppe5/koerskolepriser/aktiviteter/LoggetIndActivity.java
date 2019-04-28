@@ -1,8 +1,6 @@
 package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -21,7 +19,7 @@ import dk.gruppe5.koerskolepriser.fragmenter.mineTilbudFragment;
 
 
 public class LoggetIndActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
-                                                mineTilbudFragment.OnListFragmentInteractionListener{
+                                                mineTilbudFragment.OnListFragmentInteractionListener {
 
     private static final String TAG = "LoggetIndSide";
 
@@ -39,7 +37,6 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
 
         indlæsFragment(new mineTilbudFragment());
         titel.setText("MINE TILBUD");
-
 
 
     }
@@ -85,17 +82,12 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
 
     @Override
     public void onBackPressed() {
-
-        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
-        } else {
-            finish();
-        }
+        finish();
     }
 
     @Override
-    public void onListFragmentInteraction(DummyContent.DummyItem item) {
+    public void onListFragmentInteraction (DummyContent.DummyItem item){
 
     }
-
 }
+

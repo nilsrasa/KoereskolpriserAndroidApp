@@ -51,6 +51,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="DTU TEST KØRESKOLE"
+            android:paddingBottom="30dp"
+            android:paddingLeft="25dp"/>
+
+        <TextView
+            android:id="@+id/tv_addresse1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Køreskole"
+            android:paddingLeft="25dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_adresse2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MIN ADRESSE 1234 "
             android:paddingLeft="25dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
