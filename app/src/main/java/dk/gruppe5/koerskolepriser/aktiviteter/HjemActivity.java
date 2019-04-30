@@ -116,6 +116,11 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
 
                 //Søg for alle filtre
             }
+
+            //Opretter intent og vidersender søgning objektet til næste aktivitet
+            Intent intent = new Intent(this, SoegelisteActivity.class);
+            intent.putExtra("søgning", søgning);
+            startActivity(intent);
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);
