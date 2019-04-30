@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="null"
+                android:background="@color/colorPrimaryDark"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_arrow_back_black_24dp" />
 
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="4"
-                android:background="null"
+                android:background="@color/colorPrimaryDark"
                 android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_search_black_24dp" />
         </LinearLayout>

@@ -14,10 +14,8 @@ import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.fragmenter.dummy.DummyContent;
 import dk.gruppe5.koerskolepriser.fragmenter.dummy.DummyContent.DummyItem;
 
-import java.util.List;
 
-
-public class mineTilbudFragment extends Fragment {
+public class MineTilbudFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -29,13 +27,13 @@ public class mineTilbudFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public mineTilbudFragment() {
+    public MineTilbudFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static mineTilbudFragment newInstance(int columnCount) {
-        mineTilbudFragment fragment = new mineTilbudFragment();
+    public static MineTilbudFragment newInstance(int columnCount) {
+        MineTilbudFragment fragment = new MineTilbudFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -65,7 +63,7 @@ public class mineTilbudFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new mineTilbudRecyclerViewAdapter(DummyContent.ITEMS, mListener));
+            recyclerView.setAdapter(new MineTilbudRecyclerViewAdapter(DummyContent.ITEMS, mListener));
         }
         return view;
     }

@@ -1,9 +1,7 @@
 package dk.gruppe5.koerskolepriser.aktiviteter;
 
-import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -15,11 +13,11 @@ import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.fragmenter.OpretTilbudFragment;
 import dk.gruppe5.koerskolepriser.fragmenter.ProfilFragment;
 import dk.gruppe5.koerskolepriser.fragmenter.dummy.DummyContent;
-import dk.gruppe5.koerskolepriser.fragmenter.mineTilbudFragment;
+import dk.gruppe5.koerskolepriser.fragmenter.MineTilbudFragment;
 
 
 public class LoggetIndActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
-                                                mineTilbudFragment.OnListFragmentInteractionListener {
+                                                MineTilbudFragment.OnListFragmentInteractionListener {
 
     private static final String TAG = "LoggetIndSide";
 
@@ -35,7 +33,7 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
 
         titel = findViewById(R.id.navigation_title_txt);
 
-        indlæsFragment(new mineTilbudFragment());
+        indlæsFragment(new MineTilbudFragment());
         titel.setText("MINE TILBUD");
 
 
@@ -64,7 +62,7 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_mineTilbud:
-                fragment = new mineTilbudFragment();
+                fragment = new MineTilbudFragment();
                 titel.setText("MINE TILBUD");
                 break;
             case R.id.navigation_OpretTilbud:

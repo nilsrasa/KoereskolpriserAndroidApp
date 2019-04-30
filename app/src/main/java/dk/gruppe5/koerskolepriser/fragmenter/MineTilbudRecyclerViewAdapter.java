@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.fragmenter.mineTilbudFragment.OnListFragmentInteractionListener;
+import dk.gruppe5.koerskolepriser.fragmenter.MineTilbudFragment.OnListFragmentInteractionListener;
 import dk.gruppe5.koerskolepriser.fragmenter.dummy.DummyContent.DummyItem;
 
 import java.util.List;
@@ -17,12 +17,12 @@ import java.util.List;
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
-public class mineTilbudRecyclerViewAdapter extends RecyclerView.Adapter<mineTilbudRecyclerViewAdapter.ViewHolder> {
+public class MineTilbudRecyclerViewAdapter extends RecyclerView.Adapter<MineTilbudRecyclerViewAdapter.ViewHolder> {
 
     private final List<DummyItem> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public mineTilbudRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MineTilbudRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
