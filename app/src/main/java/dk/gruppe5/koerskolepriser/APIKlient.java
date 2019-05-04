@@ -11,7 +11,7 @@ public class APIKlient {
     static Retrofit getKlient() {
 
         retrofit = new Retrofit.Builder()
-                .baseUrl("https://reqres.in")
+                .baseUrl("http://localhost:8080/koereskole_REST/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
