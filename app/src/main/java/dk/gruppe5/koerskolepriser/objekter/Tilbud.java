@@ -3,17 +3,37 @@ package dk.gruppe5.koerskolepriser.objekter;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Tilbud implements Parcelable{
-    private String kørekort_type;
-    private String postnummer;
-    private String pris;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    private boolean lynkursus;
-    private boolean mand;
-    private boolean kvinde;
+public class Tilbud implements Parcelable{
+    @Expose
+    @SerializedName("koreskole_id")
+    private String køreskole_id;
+    @Expose
+    @SerializedName("pris")
+    private String pris;
+    @Expose
+    @SerializedName("korekort_type")
+    private String kørekort_type;
+    @Expose
+    @SerializedName("lynkursus")
+    private int lynkursus;
+    @Expose
+    @SerializedName("bilmarke")
     private String mærke;
+    @Expose
+    @SerializedName("bilstorrelse")
     private String størrelse;
+    @Expose
+    @SerializedName("kon")
+    private String køn;
+    @Expose
+    @SerializedName("tilgangeligeDage")
     private String ønskedage;
+    @Expose
+    @SerializedName("id")
+    private int id;
 
     public static final Creator<Tilbud> CREATOR = new Creator<Tilbud>() {
         @Override
@@ -30,16 +50,16 @@ public class Tilbud implements Parcelable{
     public Tilbud(){ }
 
     public Tilbud(Parcel parcel){
-        this.kørekort_type = parcel.readString();
-        this.postnummer = parcel.readString();
+        this.køreskole_id = parcel.readString();
         this.pris = parcel.readString();
+        this.kørekort_type = parcel.readString();
 
-        this.lynkursus = parcel.readByte() != 0;
-        this.mand = parcel.readByte() != 0;
-        this.kvinde = parcel.readByte() != 0;
+        this.lynkursus = parcel.readInt();
         this.mærke = parcel.readString();
         this.størrelse = parcel.readString();
+        this.køn = parcel.readString();
         this.ønskedage = parcel.readString();
+        this.id = parcel.readInt();
     }
 
     public String getKørekort_type() {
@@ -50,14 +70,6 @@ public class Tilbud implements Parcelable{
         this.kørekort_type = kørekort_type;
     }
 
-    public String getPostnummer() {
-        return postnummer;
-    }
-
-    public void setPostnummer(String postnummer) {
-        this.postnummer = postnummer;
-    }
-
     public String getPris() {
         return pris;
     }
@@ -66,28 +78,12 @@ public class Tilbud implements Parcelable{
         this.pris = pris;
     }
 
-    public boolean isLynkursus() {
+    public int isLynkursus() {
         return lynkursus;
     }
 
-    public void setLynkursus(boolean lynkursus) {
+    public void setLynkursus(int lynkursus) {
         this.lynkursus = lynkursus;
-    }
-
-    public boolean isMand() {
-        return mand;
-    }
-
-    public void setMand(boolean mand) {
-        this.mand = mand;
-    }
-
-    public boolean isKvinde() {
-        return kvinde;
-    }
-
-    public void setKvinde(boolean kvinde) {
-        this.kvinde = kvinde;
     }
 
     public String getMærke() {
@@ -121,15 +117,15 @@ public class Tilbud implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(kørekort_type);
-        parcel.writeString(postnummer);
+        parcel.writeString(køreskole_id);
         parcel.writeString(pris);
+        parcel.writeString(kørekort_type);
 
-        parcel.writeByte((byte) ((lynkursus)?1:0));
-        parcel.writeByte((byte) ((mand)?1:0));
-        parcel.writeByte((byte) ((kvinde)?1:0));
+        parcel.writeInt(lynkursus);
         parcel.writeString(mærke);
         parcel.writeString(størrelse);
+        parcel.writeString(køn);
         parcel.writeString(ønskedage);
+        parcel.writeInt(id);
     }
 }
