@@ -2,6 +2,7 @@ package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -30,7 +31,7 @@ public class SoegelisteActivity extends AppCompatActivity implements View.OnClic
         if (getIntent() != null && getIntent().hasExtra("tilbud"))
             tilbudTilBruger = getIntent().getParcelableExtra("tilbud");
 
-        System.out.print("fandt: "+tilbudTilBruger.getBeskrivelse());
+        Log.d("testTag1","fandt: "+tilbudTilBruger);
     }
 
     @Override

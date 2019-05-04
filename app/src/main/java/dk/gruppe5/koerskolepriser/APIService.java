@@ -6,14 +6,13 @@ import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface APIService {
 
     @GET("webresources/generic/getAlleTilbud")
-    Single<TilbudTilBruger> getAlleTilbudData();
+    Single<TilbudTilBruger[]> getAlleTilbudData();
 
     @POST("webresources/generic/tilbudMedGiventPostnummer/{postnummer}")
-    Single<TilbudTilBruger> hentTilbudMedPostnummer(@Path("postnummer") int postnummer);
+    Single<TilbudTilBruger[]> hentTilbudMedPostnummer(@Path("postnummer") int postnummer);
 
 }

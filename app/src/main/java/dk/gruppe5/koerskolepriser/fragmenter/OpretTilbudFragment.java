@@ -96,7 +96,7 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.btn_opretTilbud) {
+   /*     if (view.getId() == R.id.btn_opretTilbud) {
             tilbud.setKørekort_type(sp_type.getSelectedItem().toString());
             tilbud.setPostnummer(etxt_post.getText().toString());
             tilbud.setPris(sp_pris.getSelectedItem().toString());
@@ -119,6 +119,6 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         else if (view == txt_filtre){
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
-        }
+        } */
     }
 }

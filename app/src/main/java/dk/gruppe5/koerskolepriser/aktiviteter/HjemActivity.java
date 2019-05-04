@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,7 +21,9 @@ import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
 public class HjemActivity extends AppCompatActivity implements View.OnClickListener {
@@ -135,22 +138,31 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             // create an instance of the ApiService
             APIService apiService = retrofit.create(APIService.class);
             // make a request by calling the corresponding method
-            Single<TilbudTilBruger> person = apiService.getAlleTilbudData();
-            person.subscribe(new SingleObserver<TilbudTilBruger>() {
+            Single<TilbudTilBruger[]> person = apiService.getAlleTilbudData();
+            person.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<TilbudTilBruger[]>() {
                 @Override
                 public void onSubscribe(Disposable d) {
 
                 }
 
                 @Override
-                public void onSuccess(TilbudTilBruger tilbudTilBruger) {
-                    intent.putExtra("tilbud", tilbudTilBruger);
+                public void onSuccess(TilbudTilBruger[] tilbudTilBruger) {
+                    intent.putExtra("tilbud", tilbudTilBruger[0]);
+                    System.out.println(tilbudTilBruger[0].getPris());
+                    System.out.println(tilbudTilBruger[0].getBeskrivelse());
+                    System.out.println(tilbudTilBruger[0].getKøn());
+                    System.out.println(tilbudTilBruger[0].getKøreskole_id());
+                    System.out.println(tilbudTilBruger[0].getLynkursus());
+                    System.out.println(tilbudTilBruger[0].getMærke());
+                    System.out.println(tilbudTilBruger[0].getStørrelse());
                     startActivity(intent);
                 }
 
                 @Override
                 public void onError(Throwable e) {
-
+                    Log.d("testTag2","Er du dum?");
+                    e.printStackTrace();
                 }
             });
         }
