@@ -13,8 +13,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import dk.gruppe5.koerskolepriser.APIKlient;
+import dk.gruppe5.koerskolepriser.APIService;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
+import io.reactivex.Single;
+import io.reactivex.SingleObserver;
+import io.reactivex.disposables.Disposable;
+import retrofit2.Retrofit;
 
 public class HjemActivity extends AppCompatActivity implements View.OnClickListener {
     //private Button btn_søg, btn_login;
@@ -24,6 +31,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox cbox_mand, cbox_kvinde, cbox_lyn;
     private Soegning søgning;
     private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag;
+    private Retrofit retrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +98,8 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
 
         //Søgning instantiering
         søgning = new Soegning();
+
+        retrofit = APIKlient.getKlient();
     }
 
     @Override
@@ -99,7 +109,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
-            søgning.setKørekort_type(sp_type.getSelectedItem().toString());
+            /*søgning.setKørekort_type(sp_type.getSelectedItem().toString());
             søgning.setPostnummer(etxt_post.getText().toString());
             søgning.setPris(sp_pris.getSelectedItem().toString());
             if (layout_extra.getVisibility() == View.GONE){
@@ -115,12 +125,33 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
 
                 //Søg for alle filtre
-            }
+            }*/
 
             //Opretter intent og vidersender søgning objektet til næste aktivitet
             Intent intent = new Intent(this, SoegelisteActivity.class);
-            intent.putExtra("søgning", søgning);
-            startActivity(intent);
+            //intent.putExtra("søgning", søgning);
+            //startActivity(intent);
+
+            // create an instance of the ApiService
+            APIService apiService = retrofit.create(APIService.class);
+            // make a request by calling the corresponding method
+            Single<TilbudTilBruger> person = apiService.getAlleTilbudData()
+                    .subscribe(new SingleObserver<TilbudTilBruger>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(TilbudTilBruger tilbudTilBruger) {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);

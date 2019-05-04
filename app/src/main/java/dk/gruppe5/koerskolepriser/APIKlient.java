@@ -8,7 +8,7 @@ public class APIKlient {
 
     private static Retrofit retrofit = null;
 
-    static Retrofit getKlient() {
+    public static Retrofit getKlient() {
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://localhost:8080/koereskole_REST/")
