@@ -7,12 +7,14 @@ import android.widget.ImageButton;
 
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 
 public class SoegelisteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton img_btn_tilbage;
 
     private Soegning søgning;
+    private TilbudTilBruger tilbudTilBruger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,10 @@ public class SoegelisteActivity extends AppCompatActivity implements View.OnClic
         if (getIntent() != null && getIntent().hasExtra("søgning"))
             søgning = getIntent().getParcelableExtra("søgning");
 
+        if (getIntent() != null && getIntent().hasExtra("tilbud"))
+            tilbudTilBruger = getIntent().getParcelableExtra("tilbud");
+
+        System.out.print("fandt: "+tilbudTilBruger.getBeskrivelse());
     }
 
     @Override

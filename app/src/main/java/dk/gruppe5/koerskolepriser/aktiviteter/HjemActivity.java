@@ -128,30 +128,31 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             }*/
 
             //Opretter intent og vidersender søgning objektet til næste aktivitet
-            Intent intent = new Intent(this, SoegelisteActivity.class);
+            final Intent intent = new Intent(this, SoegelisteActivity.class);
             //intent.putExtra("søgning", søgning);
             //startActivity(intent);
 
             // create an instance of the ApiService
             APIService apiService = retrofit.create(APIService.class);
             // make a request by calling the corresponding method
-            Single<TilbudTilBruger> person = apiService.getAlleTilbudData()
-                    .subscribe(new SingleObserver<TilbudTilBruger>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
+            Single<TilbudTilBruger> person = apiService.getAlleTilbudData();
+            person.subscribe(new SingleObserver<TilbudTilBruger>() {
+                @Override
+                public void onSubscribe(Disposable d) {
 
-                        }
+                }
 
-                        @Override
-                        public void onSuccess(TilbudTilBruger tilbudTilBruger) {
+                @Override
+                public void onSuccess(TilbudTilBruger tilbudTilBruger) {
+                    intent.putExtra("tilbud", tilbudTilBruger);
+                    startActivity(intent);
+                }
 
-                        }
+                @Override
+                public void onError(Throwable e) {
 
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
+                }
+            });
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);
