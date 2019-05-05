@@ -1,6 +1,7 @@
 package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 import dk.gruppe5.koerskolepriser.APIKlient;
 import dk.gruppe5.koerskolepriser.APIService;
 import dk.gruppe5.koerskolepriser.R;
+import dk.gruppe5.koerskolepriser.RestHandler;
+import dk.gruppe5.koerskolepriser.objekter.PakkeTest;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import io.reactivex.Single;
@@ -111,6 +114,12 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         retrofit = APIKlient.getKlient();
     }
 
+    public void visSøgning(PakkeTest[] pakker){
+        Intent intent = new Intent(this, SoegelisteActivity.class);
+        intent.putExtra("tilbud", pakker);
+        startActivity(intent);
+    }
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_hjem_login){
@@ -124,12 +133,22 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             if (layout_extra.getVisibility() != View.GONE){
                 søgning.setAvanceret(true);
                 søgning.setLynkursus(cbox_lyn.isChecked());
+                søgning.setKøn(sp_køn.getSelectedItem().toString());
                 søgning.setMærke(sp_mærke.getSelectedItem().toString());
                 søgning.setStørrelse(sp_størrelse.getSelectedItem().toString());
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
             }
 
-
+            AsyncTask task = new AsyncTask() {
+                @Override
+                protected Object doInBackground(Object[] objects) {
+                    return RestHandler.getTilbudSomMatcher(søgning);
+                }
+                @Override
+                protected void onPostExecute(Object o) {
+                    visSøgning((PakkeTest[]) o);
+                }
+            }.execute();
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);

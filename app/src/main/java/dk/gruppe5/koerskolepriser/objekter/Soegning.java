@@ -133,13 +133,16 @@ public class Soegning implements Parcelable{
         if (!matcher) return false;
 
         if (isAvanceret()){
-            matcher = (getKøn().equals("Begge")) || (getKøn().equals(tilbud.getKøn()));
+            matcher = (getKøn().equals("Begge")) ||
+                    (getKøn().toLowerCase().equals(tilbud.getKøn().toLowerCase()));
             if (!matcher) return false;
             matcher = (!isLynkursus() || isLynkursus() == (tilbud.getLynkursus() == 1));
             if (!matcher) return false;
-            matcher = (getMærke().equals("Alle")) || (getMærke().equals(tilbud.getMærke()));
+            matcher = (getMærke().equals("Alle")) ||
+                    (getMærke().toLowerCase().equals(tilbud.getMærke().toLowerCase()));
             if (!matcher) return false;
-            matcher = (getStørrelse().equals("Alle")) || (getStørrelse().equals(tilbud.getStørrelse()));
+            matcher = (getStørrelse().equals("Alle")) ||
+                    (getStørrelse().toLowerCase().equals(tilbud.getStørrelse().toLowerCase()));
             if (!matcher) return false;
             //TODO ønskedage dage
         }
@@ -166,5 +169,20 @@ public class Soegning implements Parcelable{
             parcel.writeString(størrelse);
             parcel.writeString(ønskedage);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Soegning{" +
+                "kørekort_type='" + kørekort_type + '\'' +
+                ", postnummer=" + postnummer +
+                ", pris=" + pris +
+                ", avanceret=" + avanceret +
+                ", lynkursus=" + lynkursus +
+                ", køn='" + køn + '\'' +
+                ", mærke='" + mærke + '\'' +
+                ", størrelse='" + størrelse + '\'' +
+                ", ønskedage='" + ønskedage + '\'' +
+                '}';
     }
 }

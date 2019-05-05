@@ -164,7 +164,7 @@ public class TilbudTilBruger implements Parcelable{
                 ", størrelse='" + størrelse + '\'' +
                 ", køn='" + køn + '\'' +
                 ", beskrivelse='" + beskrivelse + '\'' +
-                ", tilgængeligedage=" + tilgængeligedage +
+                ", tilgængeligedage=" + tilgængeligedage.toString() +
                 '}';
     }
 }
