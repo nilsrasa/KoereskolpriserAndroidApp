@@ -138,7 +138,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             //startActivity(intent);
 
             // create an instance of the ApiService
-  /*          APIService apiService = retrofit.create(APIService.class);
+            APIService apiService = retrofit.create(APIService.class);
             // make a request by calling the corresponding method
             final Single<TilbudTilBruger[]> person = apiService.getAlleTilbudData();
             person.subscribeOn(Schedulers.io())
@@ -168,7 +168,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
             });
-*/
+
 
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
