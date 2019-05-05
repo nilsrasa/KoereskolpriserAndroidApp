@@ -3,34 +3,16 @@ package dk.gruppe5.koerskolepriser.aktiviteter;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
-
-import org.json.JSONObject;
-
 import java.io.IOException;
-import java.util.List;
 
-import dk.gruppe5.koerskolepriser.JsonPlaceHolderApiTest;
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.objekter.TilbudTest;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class TESTTETT extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,7 +27,7 @@ public class TESTTETT extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testtett);
 
-        textViewResult = findViewById(R.id.textView_Result);
+        textViewResult = findViewById(R.id.textView_Result_koreskole_id);
 
         testKnap = findViewById(R.id.buttonTest);
         testKnap.setOnClickListener(this);

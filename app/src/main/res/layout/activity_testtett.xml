@@ -19,17 +19,80 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/buttonTest"
-        tools:layout_editor_absoluteX="8dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonTest">
 
-        <TextView
-            android:id="@+id/textView_Result"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </android.support.v4.widget.NestedScrollView>
+            android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView_Result_koreskole_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Køreskole id" />
+
+            <TextView
+                android:id="@+id/textView_Result_pris"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pris" />
+
+            <TextView
+                android:id="@+id/textView_Result_korekortType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Køreskole id" />
+
+            <TextView
+                android:id="@+id/textView_Result_lynKursus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lynkursus" />
+
+            <TextView
+                android:id="@+id/textView_Result_bilmarke"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bilmærke" />
+
+            <TextView
+                android:id="@+id/textView_Result_bilstorelse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bil størrelse" />
+
+            <TextView
+                android:id="@+id/textView_Result_kon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Køn" />
+
+            <TextView
+                android:id="@+id/textView_Result_Beskrivelse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Beskrivelse" />
+
+
+        </LinearLayout>
+        </ScrollView>
+    </android.support.v7.widget.CardView>
 
 </android.support.constraint.ConstraintLayout>
