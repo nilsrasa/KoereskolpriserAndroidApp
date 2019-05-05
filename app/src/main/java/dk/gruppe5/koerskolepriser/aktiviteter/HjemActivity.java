@@ -42,12 +42,14 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_hjem);
 
         //Buttons
-        Button btn_søg, btn_login;
+        Button btn_søg, btn_login, testKnap;
         btn_login = findViewById(R.id.btn_hjem_login);
         btn_søg = findViewById(R.id.btn_hjem_soeg);
+        testKnap = findViewById(R.id.btn_hjem_testtest);
 
         btn_login.setOnClickListener(this);
         btn_søg.setOnClickListener(this);
+        testKnap.setOnClickListener(this);
 
         //Text
         txt_filtre = findViewById(R.id.txt_hjem_filtre);
@@ -136,9 +138,9 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             //startActivity(intent);
 
             // create an instance of the ApiService
-            APIService apiService = retrofit.create(APIService.class);
+  /*          APIService apiService = retrofit.create(APIService.class);
             // make a request by calling the corresponding method
-            Single<TilbudTilBruger[]> person = apiService.getAlleTilbudData();
+            final Single<TilbudTilBruger[]> person = apiService.getAlleTilbudData();
             person.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<TilbudTilBruger[]>() {
                 @Override
@@ -157,6 +159,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                     System.out.println(tilbudTilBruger[0].getMærke());
                     System.out.println(tilbudTilBruger[0].getStørrelse());
                     startActivity(intent);
+                    Log.d("AhadLoggerNoget---1", " :: :: :: " + person.toString());
                 }
 
                 @Override
@@ -165,10 +168,16 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                     e.printStackTrace();
                 }
             });
+*/
+
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
+        }
+        else if (view.getId() == R.id.btn_hjem_testtest) {
+            Intent i = new Intent(this, TESTTETT.class);
+            startActivity(i);
         }
     }
 }
