@@ -12,7 +12,7 @@ public class TilbudTilBruger implements Parcelable{
     private String køreskole_id;
     @Expose
     @SerializedName("pris")
-    private String pris;
+    private int pris;
     @Expose
     @SerializedName("korekort_type")
     private String kørekort_type;
@@ -50,16 +50,16 @@ public class TilbudTilBruger implements Parcelable{
 
     public TilbudTilBruger(){ }
 
-    public TilbudTilBruger(Parcel parcel){
+    protected TilbudTilBruger(Parcel parcel){
         this.køreskole_id = parcel.readString();
-        this.pris = parcel.readString();
+        this.pris = parcel.readInt();
         this.kørekort_type = parcel.readString();
-
         this.lynkursus = parcel.readInt();
         this.mærke = parcel.readString();
         this.størrelse = parcel.readString();
         this.køn = parcel.readString();
         this.beskrivelse = parcel.readString();
+        this.tilgængeligedage = parcel.readParcelable(Tilgaengeligedage.class.getClassLoader());
     }
 
     public String getKørekort_type() {
@@ -70,13 +70,6 @@ public class TilbudTilBruger implements Parcelable{
         this.kørekort_type = kørekort_type;
     }
 
-    public String getPris() {
-        return pris;
-    }
-
-    public void setPris(String pris) {
-        this.pris = pris;
-    }
 
     public String getMærke() {
         return mærke;
@@ -134,6 +127,14 @@ public class TilbudTilBruger implements Parcelable{
         this.tilgængeligedage = tilgængeligedage;
     }
 
+    public int getPris() {
+        return pris;
+    }
+
+    public void setPris(int pris) {
+        this.pris = pris;
+    }
+
     @Override
     public int describeContents() {
         return hashCode();
@@ -142,14 +143,14 @@ public class TilbudTilBruger implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(køreskole_id);
-        parcel.writeString(pris);
+        parcel.writeInt(pris);
         parcel.writeString(kørekort_type);
-
         parcel.writeInt(lynkursus);
         parcel.writeString(mærke);
         parcel.writeString(størrelse);
         parcel.writeString(køn);
         parcel.writeString(beskrivelse);
+        parcel.writeParcelable(tilgængeligedage,0);
     }
 
     @Override
@@ -163,7 +164,7 @@ public class TilbudTilBruger implements Parcelable{
                 ", størrelse='" + størrelse + '\'' +
                 ", køn='" + køn + '\'' +
                 ", beskrivelse='" + beskrivelse + '\'' +
-                ", tilgængeligedage=" + tilgængeligedage +
+                ", tilgængeligedage=" + tilgængeligedage.toString() +
                 '}';
     }
 }
