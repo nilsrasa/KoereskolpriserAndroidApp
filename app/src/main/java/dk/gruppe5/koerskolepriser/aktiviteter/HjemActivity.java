@@ -31,9 +31,9 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
     private TextView txt_filtre;
     private EditText etxt_post;
     private View layout_extra;
-    private CheckBox cbox_mand, cbox_kvinde, cbox_lyn;
+    private CheckBox cbox_lyn;
     private Soegning søgning;
-    private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag;
+    private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag, sp_køn;
     private Retrofit retrofit;
 
     @Override
@@ -92,9 +92,13 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_dag.setAdapter(adapter);
 
+        sp_køn = findViewById(R.id.sp_hjem_koen);//Køn
+        adapter = ArrayAdapter.createFromResource(this,
+                R.array.køn, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_køn.setAdapter(adapter);
+
         //Checkboxes
-        cbox_mand = findViewById(R.id.cbox_hjem_mand);
-        cbox_kvinde = findViewById(R.id.cbox_hjem_kvinde);
         cbox_lyn = findViewById(R.id.cbox_hjem_lyn);
 
         //Extra
@@ -114,60 +118,16 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
-            /*søgning.setKørekort_type(sp_type.getSelectedItem().toString());
-            søgning.setPostnummer(etxt_post.getText().toString());
-            søgning.setPris(sp_pris.getSelectedItem().toString());
-            if (layout_extra.getVisibility() == View.GONE){
-                //Søg for std filtre
-            }
-            else {
+            søgning.setKørekort_type(sp_type.getSelectedItem().toString());
+            søgning.setPostnummer(Integer.parseInt(etxt_post.getText().toString()));
+            søgning.setPris(Integer.parseInt(sp_pris.getSelectedItem().toString()));
+            if (layout_extra.getVisibility() != View.GONE){
                 søgning.setAvanceret(true);
                 søgning.setLynkursus(cbox_lyn.isChecked());
-                søgning.setMand(cbox_mand.isChecked());
-                søgning.setKvinde(cbox_kvinde.isChecked());
                 søgning.setMærke(sp_mærke.getSelectedItem().toString());
                 søgning.setStørrelse(sp_størrelse.getSelectedItem().toString());
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
-
-                //Søg for alle filtre
-            }*/
-
-            //Opretter intent og vidersender søgning objektet til næste aktivitet
-            final Intent intent = new Intent(this, SoegelisteActivity.class);
-            //intent.putExtra("søgning", søgning);
-            //startActivity(intent);
-
-            // create an instance of the ApiService
-            APIService apiService = retrofit.create(APIService.class);
-            // make a request by calling the corresponding method
-            final Single<TilbudTilBruger[]> person = apiService.getAlleTilbudData();
-            person.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<TilbudTilBruger[]>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-
-                }
-
-                @Override
-                public void onSuccess(TilbudTilBruger[] tilbudTilBruger) {
-                    intent.putExtra("tilbud", tilbudTilBruger[0]);
-                    System.out.println(tilbudTilBruger[0].getPris());
-                    System.out.println(tilbudTilBruger[0].getBeskrivelse());
-                    System.out.println(tilbudTilBruger[0].getKøn());
-                    System.out.println(tilbudTilBruger[0].getKøreskole_id());
-                    System.out.println(tilbudTilBruger[0].getLynkursus());
-                    System.out.println(tilbudTilBruger[0].getMærke());
-                    System.out.println(tilbudTilBruger[0].getStørrelse());
-                    startActivity(intent);
-                    Log.d("AhadLoggerNoget---1", " :: :: :: " + person.toString());
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    Log.d("testTag2","Er du dum?");
-                    e.printStackTrace();
-                }
-            });
+            }
 
 
         }

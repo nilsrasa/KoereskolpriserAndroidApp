@@ -47,4 +47,10 @@
         <item>Lørdag</item>
         <item>Søndag</item>
     </string-array>
+
+    <string-array name="køn">
+        <item>Begge</item>
+        <item>Kvinde</item>
+        <item>Mand</item>
+    </string-array>
 </resources>

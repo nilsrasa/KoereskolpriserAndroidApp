@@ -97,25 +97,10 @@
                 android:layout_height="wrap_content"
                 android:text="@string/koen" />
 
-            <LinearLayout
+            <Spinner
+                android:id="@+id/sp_hjem_koen"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <CheckBox
-                    android:id="@+id/cbox_hjem_mand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/mand" />
-
-                <CheckBox
-                    android:id="@+id/cbox_hjem_kvinde"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/kvinde" />
-            </LinearLayout>
+                android:layout_height="wrap_content" />
 
             <View
                 style="@style/Divider"

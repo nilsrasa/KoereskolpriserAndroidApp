@@ -1,11 +1,36 @@
 package dk.gruppe5.koerskolepriser.objekter;
 
-public class Koereskole {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Koereskole implements Parcelable {
     private String navn;
     private String adresse;
     private int postnummer;
     private int telefonnummer;
     private String email;
+
+    public Koereskole(){}
+
+    protected Koereskole(Parcel in) {
+        navn = in.readString();
+        adresse = in.readString();
+        postnummer = in.readInt();
+        telefonnummer = in.readInt();
+        email = in.readString();
+    }
+
+    public static final Creator<Koereskole> CREATOR = new Creator<Koereskole>() {
+        @Override
+        public Koereskole createFromParcel(Parcel in) {
+            return new Koereskole(in);
+        }
+
+        @Override
+        public Koereskole[] newArray(int size) {
+            return new Koereskole[size];
+        }
+    };
 
     public String getNavn() {
         return navn;
@@ -56,5 +81,19 @@ public class Koereskole {
                 ", telefonnummer=" + telefonnummer +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(navn);
+        dest.writeString(adresse);
+        dest.writeInt(postnummer);
+        dest.writeInt(telefonnummer);
+        dest.writeString(email);
     }
 }
