@@ -151,4 +151,19 @@ public class TilbudTilBruger implements Parcelable{
         parcel.writeString(køn);
         parcel.writeString(beskrivelse);
     }
+
+    @Override
+    public String toString() {
+        return "TilbudTilBruger{" +
+                "køreskole_id='" + køreskole_id + '\'' +
+                ", pris='" + pris + '\'' +
+                ", kørekort_type='" + kørekort_type + '\'' +
+                ", lynkursus=" + lynkursus +
+                ", mærke='" + mærke + '\'' +
+                ", størrelse='" + størrelse + '\'' +
+                ", køn='" + køn + '\'' +
+                ", beskrivelse='" + beskrivelse + '\'' +
+                ", tilgængeligedage=" + tilgængeligedage +
+                '}';
+    }
 }

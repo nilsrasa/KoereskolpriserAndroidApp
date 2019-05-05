@@ -7,9 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 
 import dk.gruppe5.koerskolepriser.R;
+import dk.gruppe5.koerskolepriser.objekter.PakkeTest;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -52,6 +55,11 @@ public class TESTTETT extends AppCompatActivity implements View.OnClickListener 
 
                     try {
                         response = client.newCall(request).execute();
+
+                        PakkeTest[] pakke = new Gson().fromJson(response.body().string(), PakkeTest[].class);
+
+                        System.out.println(pakke[0].toString());
+
                         return response.body().string();
                     } catch (IOException e) {
                         e.printStackTrace();
