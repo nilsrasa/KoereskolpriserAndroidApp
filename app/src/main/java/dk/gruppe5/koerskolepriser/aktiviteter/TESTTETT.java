@@ -20,7 +20,7 @@ import okhttp3.Response;
 
 public class TESTTETT extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView textViewResult;
+    private TextView tvKøreskoleID, tvPris, tvKørekortType, tvLynKursus, tvBilmærke, tvBilStørrelse, tvKøn, tvBeskrivelse, tvTilgængeligeDage;
     private Button testKnap;
 
     String url = "http://10.0.2.2:8080/koereskole_REST/webresources/generic/getAlleTilbud";
@@ -31,8 +31,18 @@ public class TESTTETT extends AppCompatActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_testtett);
 
-        textViewResult = findViewById(R.id.textView_Result_koreskole_id);
+        // TextView
+        tvKøreskoleID = findViewById(R.id.textView_Result_koreskole_id);
+        tvPris = findViewById(R.id.textView_Result_pris);
+        tvKørekortType = findViewById(R.id.textView_Result_korekortType);
+        tvLynKursus = findViewById(R.id.textView_Result_lynKursus);
+        tvBilmærke = findViewById(R.id.textView_Result_bilmarke);
+        tvBilStørrelse = findViewById(R.id.textView_Result_bilstorelse);
+        tvKøn = findViewById(R.id.textView_Result_kon);
+        tvBeskrivelse = findViewById(R.id.textView_Result_Beskrivelse);
+        tvTilgængeligeDage = findViewById(R.id.textView_Result_TilgaengeligeDage);
 
+        // Knap
         testKnap = findViewById(R.id.buttonTest);
         testKnap.setOnClickListener(this);
 
@@ -69,7 +79,19 @@ public class TESTTETT extends AppCompatActivity implements View.OnClickListener 
                     PakkeTest[] pakker = (PakkeTest[]) o;
                     TilbudTilBruger tilbud = pakker[0].getTilbud();
 
+
                     //TODO: vis et enkelt tilbud
+                    tvKøreskoleID.setText(o.toString());
+                    //tvKøreskoleID.setText(o.toString());
+                    /*tvPris.setText(o.toString());
+                    tvKørekortType.setText(o.toString());
+                    tvLynKursus.setText(o.toString());
+                    tvBilmærke.setText(o.toString());
+                    tvBilStørrelse.setText(o.toString());
+                    tvKøn.setText(o.toString());
+                    tvBeskrivelse.setText(o.toString());
+                    tvTilgængeligeDage.setText(o.toString());
+                    */
                 }
 
             }.execute();

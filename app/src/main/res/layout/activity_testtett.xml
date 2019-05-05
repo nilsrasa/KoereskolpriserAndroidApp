@@ -90,6 +90,12 @@
                 android:layout_height="wrap_content"
                 android:text="Beskrivelse" />
 
+            <TextView
+                android:id="@+id/textView_Result_TilgaengeligeDage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Beskrivelse" />
+
 
         </LinearLayout>
         </ScrollView>

@@ -23,9 +23,11 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
     private EditText etxt_post;
     private View layout_extra;
     private CheckBox cbox_mand, cbox_kvinde, cbox_lyn;
+    private CheckBox man, tir, ons, tor, fre, lør, søn;
     private Button opret_btn;
     private Tilbud tilbud;
-    private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag;
+    private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,7 +36,6 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
 
         //Buttons
         opret_btn = v.findViewById(R.id.btn_opretTilbud);
-
         opret_btn.setOnClickListener(this);
 
         //Text
@@ -72,16 +73,17 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_størrelse.setAdapter(adapter);
 
-        sp_dag = v.findViewById(R.id.sp_opret_dage);//Ønskede dage
-        adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.ønskedage, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp_dag.setAdapter(adapter);
-
         //Checboxes
         cbox_mand = v.findViewById(R.id.cbox_opret_mand);
         cbox_kvinde = v.findViewById(R.id.cbox_opret_kvinde);
         cbox_lyn = v.findViewById(R.id.cbox_opret_lyn);
+        man = v.findViewById(R.id.cbMan);
+        tir = v.findViewById(R.id.cbTirs);
+        ons = v.findViewById(R.id.cbOns);
+        tor = v.findViewById(R.id.cbTors);
+        fre = v.findViewById(R.id.cbFre);
+        lør = v.findViewById(R.id.cbLør);
+        søn = v.findViewById(R.id.cbSøn);
 
         //Extra
         layout_extra = v.findViewById(R.id.layout_opret_extra);
@@ -93,32 +95,86 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         return v;
     }
 
+    private void dagChecker() {
+
+        int[] arr = {0,0,0,0,0,0,0};
+
+        if (man.isChecked())
+            arr[0] = 1;
+        if (tir.isChecked())
+            arr[1] = 1;
+        if (ons.isChecked())
+            arr[2] = 1;
+        if (tor.isChecked())
+            arr[3] = 1;
+        if (fre.isChecked())
+            arr[4] = 1;
+        if (lør.isChecked())
+            arr[5] = 1;
+        if (søn.isChecked())
+            arr[6] = 1;
+
+
+        for (int i=0; i<arr.length; i++) {
+            System.out.print(arr[i]);
+        }
+
+    }
+
+    private void postNrChecker() {
+        if (etxt_post.getText().length() > 4) {
+            etxt_post.setError("Et dansk postnummer er på 4 cifre!");
+        } else if (etxt_post.getText().length() == 0) {
+            etxt_post.setError("Skriv et postnummer");
+        } else if (etxt_post.getText().length() == 4) {
+            System.out.println(etxt_post.getText().toString());
+        }
+    }
+
+    private void lynChecker() {
+        if (cbox_lyn.isChecked()) {
+            System.out.println(1);
+        } else {
+            System.out.println(0);
+        }
+    }
+
+    private void koenChecker() {
+            if (cbox_mand.isChecked() && cbox_kvinde.isChecked()) {
+                System.out.println("mand og kvinde");
+            } else if (cbox_kvinde.isChecked()) {
+                System.out.println("kvinde");
+            } else if (cbox_mand.isChecked()) {
+                System.out.println("mand");
+            } else if (!cbox_mand.isChecked() && !cbox_kvinde.isChecked()) {
+                System.out.println("andet");
+            }
+    }
 
     @Override
     public void onClick(View view) {
-   /*     if (view.getId() == R.id.btn_opretTilbud) {
-            tilbud.setKørekort_type(sp_type.getSelectedItem().toString());
-            tilbud.setPostnummer(etxt_post.getText().toString());
-            tilbud.setPris(sp_pris.getSelectedItem().toString());
-            if (layout_extra.getVisibility() == View.GONE) {
-                //Søg for std filtre
-            }
-            else {
-                tilbud.setLynkursus(cbox_lyn.isChecked());
-                tilbud.setMand(cbox_mand.isChecked());
-                tilbud.setKvinde(cbox_kvinde.isChecked());
-                tilbud.setMærke(sp_mærke.getSelectedItem().toString());
-                tilbud.setStørrelse(sp_størrelse.getSelectedItem().toString());
-                tilbud.setØnskedage(sp_dag.getSelectedItem().toString());
+        if (view.getId() == R.id.btn_opretTilbud) {
 
-                //Søg for alle filtre
-            }
+            System.out.println(sp_type.getSelectedItem().toString());
 
-            //Opretter intent og vidersender tilbud objektet til (database på server)
-        }
-        else if (view == txt_filtre){
+            postNrChecker();
+
+            System.out.println(sp_pris.getSelectedItem().toString());
+
+            lynChecker();
+
+            koenChecker();
+
+            System.out.println(sp_mærke.getSelectedItem().toString());
+
+            System.out.println(sp_størrelse.getSelectedItem().toString());
+
+            dagChecker();
+
+        } else if (view.getId() == R.id.txt_opretTilbud_filtre) {
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
-        } */
+        }
+
     }
 }
