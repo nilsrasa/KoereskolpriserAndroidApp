@@ -31,6 +31,10 @@ public class TilbudTilBruger implements Parcelable{
     @Expose
     @SerializedName("beskrivelse")
     private String beskrivelse;
+    @Expose
+    @SerializedName("tilgangeligeDage")
+    private Tilgaengeligedage tilgængeligedage;
+
 
     public static final Creator<TilbudTilBruger> CREATOR = new Creator<TilbudTilBruger>() {
         @Override
@@ -116,6 +120,18 @@ public class TilbudTilBruger implements Parcelable{
 
     public void setBeskrivelse(String beskrivelse) {
         this.beskrivelse = beskrivelse;
+    }
+
+    public void setLynkursus(int lynkursus) {
+        this.lynkursus = lynkursus;
+    }
+
+    public Tilgaengeligedage getTilgængeligedage() {
+        return tilgængeligedage;
+    }
+
+    public void setTilgængeligedage(Tilgaengeligedage tilgængeligedage) {
+        this.tilgængeligedage = tilgængeligedage;
     }
 
     @Override
