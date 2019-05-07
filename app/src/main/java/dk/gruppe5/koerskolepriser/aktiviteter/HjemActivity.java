@@ -99,6 +99,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         layout_extra = findViewById(R.id.layout_hjem_extra);
         layout_extra.setVisibility(View.GONE);
 
+        //Retrofit
         retrofit = APIKlient.getKlient();
     }
 
