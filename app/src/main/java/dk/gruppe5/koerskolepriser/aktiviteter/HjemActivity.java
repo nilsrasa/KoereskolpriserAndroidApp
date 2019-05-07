@@ -45,14 +45,12 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_hjem);
 
         //Buttons
-        Button btn_søg, btn_login, testKnap;
+        Button btn_søg, btn_login;
         btn_login = findViewById(R.id.btn_hjem_login);
         btn_søg = findViewById(R.id.btn_hjem_soeg);
-        testKnap = findViewById(R.id.btn_hjem_testtest);
 
         btn_login.setOnClickListener(this);
         btn_søg.setOnClickListener(this);
-        testKnap.setOnClickListener(this);
 
         //Text
         txt_filtre = findViewById(R.id.txt_hjem_filtre);
