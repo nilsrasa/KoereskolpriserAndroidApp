@@ -1,30 +1,25 @@
 package dk.gruppe5.koerskolepriser.aktiviteter;
 
-import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.adaptere.PakkeTilbudAdapter;
-import dk.gruppe5.koerskolepriser.objekter.PakkeTest;
-import dk.gruppe5.koerskolepriser.objekter.Soegning;
-import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
+import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
 
 public class SoegelisteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton img_btn_tilbage;
     private ListView listView;
 
-    private List<PakkeTest> pakker = new ArrayList<>();
+    private List<PakkeTilbud> pakker = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +37,7 @@ public class SoegelisteActivity extends AppCompatActivity implements View.OnClic
 
         if (parcelables != null) {
             for (Parcelable parcelable : parcelables) {
-                pakker.add((PakkeTest) parcelable);
+                pakker.add((PakkeTilbud) parcelable);
             }
         }
 

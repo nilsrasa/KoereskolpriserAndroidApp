@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -19,9 +18,9 @@ import dk.gruppe5.koerskolepriser.APIKlient;
 import dk.gruppe5.koerskolepriser.APIService;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.RestHandler;
-import dk.gruppe5.koerskolepriser.objekter.PakkeTest;
+import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
-import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
+import io.reactivex.Scheduler;
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -112,7 +111,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         retrofit = APIKlient.getKlient();
     }
 
-    public void visSøgning(PakkeTest[] pakker){
+    public void visSøgning(PakkeTilbud[] pakker){
         Intent intent = new Intent(this, SoegelisteActivity.class);
         intent.putExtra("tilbud", pakker);
         startActivity(intent);
@@ -137,16 +136,41 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
             }
 
-            AsyncTask task = new AsyncTask() {
+            Retrofit klient = APIKlient.getKlient();
+
+            APIService apiService = klient.create(APIService.class);
+
+            Single<PakkeTilbud[]> tilbud = apiService.getAlleTilbudData();
+
+            tilbud.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new SingleObserver<PakkeTilbud[]>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(PakkeTilbud[] pakkeTilbuds) {
+                            visSøgning(pakkeTilbuds);
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
+
+                        }
+                    });
+
+            /*AsyncTask task = new AsyncTask() {
                 @Override
                 protected Object doInBackground(Object[] objects) {
                     return RestHandler.getTilbudSomMatcher(søgning);
                 }
                 @Override
                 protected void onPostExecute(Object o) {
-                    visSøgning((PakkeTest[]) o);
+                    visSøgning((PakkeTilbud[]) o);
                 }
-            }.execute();
+            }.execute();*/
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);

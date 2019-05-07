@@ -3,8 +3,6 @@ package dk.gruppe5.koerskolepriser.objekter;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import dk.gruppe5.koerskolepriser.R;
-
 public class Soegning implements Parcelable{
     private String kørekort_type;
     private int postnummer;
@@ -121,7 +119,7 @@ public class Soegning implements Parcelable{
         this.pris = pris;
     }
 
-    public boolean matcher(PakkeTest pakke){
+    public boolean matcher(PakkeTilbud pakke){
         boolean matcher = false;
         TilbudTilBruger tilbud = pakke.getTilbud();
 

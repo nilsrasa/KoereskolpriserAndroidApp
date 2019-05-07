@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PakkeTest implements Parcelable {
+public class PakkeTilbud implements Parcelable {
     @Expose
     @SerializedName("tilbud")
     private TilbudTilBruger tilbud;
@@ -14,22 +14,22 @@ public class PakkeTest implements Parcelable {
     @SerializedName("koreskole")
     private Koereskole køreskole;
 
-    public PakkeTest(){}
+    public PakkeTilbud(){}
 
-    protected PakkeTest(Parcel in) {
+    protected PakkeTilbud(Parcel in) {
         tilbud = in.readParcelable(TilbudTilBruger.class.getClassLoader());
         køreskole = in.readParcelable(Koereskole.class.getClassLoader());
     }
 
-    public static final Creator<PakkeTest> CREATOR = new Creator<PakkeTest>() {
+    public static final Creator<PakkeTilbud> CREATOR = new Creator<PakkeTilbud>() {
         @Override
-        public PakkeTest createFromParcel(Parcel in) {
-            return new PakkeTest(in);
+        public PakkeTilbud createFromParcel(Parcel in) {
+            return new PakkeTilbud(in);
         }
 
         @Override
-        public PakkeTest[] newArray(int size) {
-            return new PakkeTest[size];
+        public PakkeTilbud[] newArray(int size) {
+            return new PakkeTilbud[size];
         }
     };
 
@@ -51,7 +51,7 @@ public class PakkeTest implements Parcelable {
 
     @Override
     public String toString() {
-        return "PakkeTest{" +
+        return "PakkeTilbud{" +
                 "tilbud=" + tilbud.toString() +
                 ", køreskole=" + køreskole.toString() +
                 '}';
