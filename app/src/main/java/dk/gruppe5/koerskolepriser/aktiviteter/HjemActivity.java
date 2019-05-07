@@ -1,7 +1,6 @@
 package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -15,23 +14,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
-import dk.gruppe5.koerskolepriser.APIService;
 import dk.gruppe5.koerskolepriser.DataFetcher;
-import dk.gruppe5.koerskolepriser.OnDataListener;
+import dk.gruppe5.koerskolepriser.listeners.OnDataFetchedListener;
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.RestHandler;
 import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
 import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
-import io.reactivex.Scheduler;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnDataListener {
+public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnDataFetchedListener {
     //private Button btn_søg, btn_login;
     private TextView txt_filtre;
     private EditText etxt_post;
