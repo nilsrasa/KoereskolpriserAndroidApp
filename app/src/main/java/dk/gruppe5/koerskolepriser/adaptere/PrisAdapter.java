@@ -31,8 +31,10 @@ public class PrisAdapter<T> extends ArrayAdapter<T> {
     private View getPrisView(int position, View convertView, ViewGroup parent){
         View view = super.getView(position, convertView, parent);
 
-        TextView text = (TextView)view;
-        text.setText(String.format("%d kr.", Priser.priser[position]));
+        if (position != 0) {
+            TextView text = (TextView) view;
+            text.setText(String.format("%d kr.", Priser.priser[position - 1]));
+        }
 
 
         return view;

@@ -31,13 +31,12 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class HjemActivity extends AppCompatActivity implements View.OnClickListener {
+public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnDataListener {
     //private Button btn_søg, btn_login;
     private TextView txt_filtre;
     private EditText etxt_post;
     private View layout_extra;
     private CheckBox cbox_lyn;
-    private Soegning søgning;
     private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag, sp_køn;
     private Retrofit retrofit;
 
@@ -109,9 +108,6 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         layout_extra = findViewById(R.id.layout_hjem_extra);
         layout_extra.setVisibility(View.GONE);
 
-        //Søgning instantiering
-        søgning = new Soegning();
-
         retrofit = APIKlient.getKlient();
     }
 
@@ -128,10 +124,13 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
+            Soegning søgning = new Soegning();
+
             søgning.setKørekort_type(sp_type.getSelectedItem().toString());
             if (etxt_post.getText().length() > 0)
                 søgning.setPostnummer(Integer.parseInt(etxt_post.getText().toString()));
-            søgning.setPris(Integer.parseInt(sp_pris.getSelectedItem().toString()));
+            if (!sp_pris.getSelectedItem().toString().equals("Alle"))
+                søgning.setPris(Integer.parseInt(sp_pris.getSelectedItem().toString()));
             if (layout_extra.getVisibility() != View.GONE){
                 søgning.setAvanceret(true);
                 søgning.setLynkursus(cbox_lyn.isChecked());
@@ -141,21 +140,24 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
             }
 
-            DataFetcher.getInstance().søgEfterTilbud(søgning, new OnDataListener() {
-                @Override
-                public void onSuccess(PakkeTilbud[] pakkeTilbud) {
-                    visSøgning(pakkeTilbud);
-                }
-
-                @Override
-                public void onError(Throwable e) {
-
-                }
-            });
+            if (!søgning.isTom())
+                DataFetcher.getInstance().søgEfterTilbud(søgning, this);
+            else
+                DataFetcher.getInstance().hentAlleTilbud(this);
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onSuccess(PakkeTilbud[] pakkeTilbud) {
+        visSøgning(pakkeTilbud);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        e.printStackTrace();
     }
 }

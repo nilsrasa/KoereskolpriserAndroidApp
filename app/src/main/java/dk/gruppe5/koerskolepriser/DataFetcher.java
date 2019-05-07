@@ -23,6 +23,29 @@ public class DataFetcher {
         apiService = APIKlient.getKlient().create(APIService.class);
     }
 
+    public void hentAlleTilbud(final OnDataListener listener) {
+        Single<PakkeTilbud[]> tilbud = apiService.getAlleTilbudData();
+
+        tilbud.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<PakkeTilbud[]>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(PakkeTilbud[] pakker) {
+                        listener.onSuccess(pakker);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onError(e);
+                    }
+                });
+    }
+
     public void søgEfterTilbud(final Soegning søgning, final OnDataListener listener){
         Single<PakkeTilbud[]> tilbud = apiService.getAlleTilbudData();
 

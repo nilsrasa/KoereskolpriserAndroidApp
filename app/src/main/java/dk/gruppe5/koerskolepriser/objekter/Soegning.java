@@ -119,29 +119,48 @@ public class Soegning implements Parcelable{
         this.pris = pris;
     }
 
+    public boolean isTom(){
+        boolean tom = postnummer == 0 && pris == 0 && kørekort_type.equals("Alle");
+        if (tom && avanceret){
+            tom = køn.equals("Begge") && !lynkursus && mærke.equals("Alle") &&
+                    størrelse.equals("Alle");
+        }
+
+        return tom;
+    }
+
     public boolean matcher(PakkeTilbud pakke){
-        boolean matcher = false;
+        boolean matcher;
         TilbudTilBruger tilbud = pakke.getTilbud();
 
-        matcher = (tilbud.getKørekort_type().equals(getKørekort_type()));
-        if (!matcher) return false;
-        matcher = (pakke.getKøreskole().getPostnummer() == getPostnummer());
-        if (!matcher) return false;
-        matcher = (tilbud.getPris() == getPris());
-        if (!matcher) return false;
+        matcher = (getKørekort_type().equals("Alle") ||
+                tilbud.getKørekort_type().equals(getKørekort_type()));
+        if (!matcher)
+            return false;
+        matcher = (getPostnummer() == 0 ||
+                pakke.getKøreskole().getPostnummer() == getPostnummer());
+        if (!matcher)
+            return false;
+        matcher = (getPris() == 0 || tilbud.getPris() == getPris());
+        if (!matcher)
+            return false;
 
         if (isAvanceret()){
             matcher = (getKøn().equals("Begge")) ||
                     (getKøn().toLowerCase().equals(tilbud.getKøn().toLowerCase()));
-            if (!matcher) return false;
+            if (!matcher)
+                return false;
             matcher = (!isLynkursus() || isLynkursus() == (tilbud.getLynkursus() == 1));
-            if (!matcher) return false;
+            if (!matcher)
+                return false;
             matcher = (getMærke().equals("Alle")) ||
                     (getMærke().toLowerCase().equals(tilbud.getMærke().toLowerCase()));
-            if (!matcher) return false;
+            if (!matcher)
+                return false;
             matcher = (getStørrelse().equals("Alle")) ||
                     (getStørrelse().toLowerCase().equals(tilbud.getStørrelse().toLowerCase()));
-            if (!matcher) return false;
+            if (!matcher)
+                return false;
             //TODO ønskedage dage
         }
 
