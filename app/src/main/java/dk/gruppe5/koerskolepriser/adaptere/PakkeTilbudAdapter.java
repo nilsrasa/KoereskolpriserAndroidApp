@@ -1,6 +1,7 @@
 package dk.gruppe5.koerskolepriser.adaptere;
 
 import android.content.Context;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,8 @@ public class PakkeTilbudAdapter extends BaseAdapter {
 
         TextView tv = view.findViewById(R.id.list_text);
 
-        tv.setText(pakke.toString());
+        tv.setText(Html.fromHtml(pakke.toString()));
+
 
         return view;
     }

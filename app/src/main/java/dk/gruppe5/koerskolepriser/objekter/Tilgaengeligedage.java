@@ -110,14 +110,25 @@ public class Tilgaengeligedage implements Parcelable {
 
     @Override
     public String toString() {
-        return "Tilgaengeligedage{" +
-                "tilgangelig_mandag=" + tilgangelig_mandag +
-                ", tilgangelig_tirsdag=" + tilgangelig_tirsdag +
-                ", tilgangelig_onsdag=" + tilgangelig_onsdag +
-                ", tilgangelig_torsdag=" + tilgangelig_torsdag +
-                ", tilgangelig_fredag=" + tilgangelig_fredag +
-                ", tilgangelig_lordag=" + tilgangelig_lordag +
-                ", tilgangelig_sondag=" + tilgangelig_sondag +
-                '}';
+
+        String s = "";
+
+        if (tilgangelig_mandag == 1)
+            s = "mandag";
+        if (tilgangelig_tirsdag == 1)
+            s += ", tirsdag";
+        if (tilgangelig_onsdag == 1)
+            s += ", onsdag";
+        if (tilgangelig_torsdag == 1)
+            s += ", torsdag";
+        if (tilgangelig_fredag == 1)
+            s += ", fredag";
+        if (tilgangelig_lordag == 1)
+            s += ", lørdag";
+        if (tilgangelig_sondag == 1)
+            s += ", søndag";
+
+
+        return s;
     }
 }

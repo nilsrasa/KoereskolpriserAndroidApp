@@ -51,11 +51,34 @@ public class PakkeTilbud implements Parcelable {
 
     @Override
     public String toString() {
-        return "PakkeTilbud{" +
-                "tilbud=" + tilbud.toString() +
-                ", køreskole=" + køreskole.toString() +
-                '}';
+
+        return "<b><u>Tilbud: </u></b>"
+                + "<br>" + "Kørekort: " + tilbud.getKørekort_type()
+                + "<br>" + "Pris: " + tilbud.getPris()
+                + "<br>" + "Lynkurs: " + lynKursusChecker()
+                + "<br>" + "Bilmærke: " + tilbud.getMærke()
+                + "<br>" + "Bilstørrelse: " + tilbud.getStørrelse()
+                + "<br>" + "Kørelærer køn: " + tilbud.getKøn()
+                + "<br>" + "Tilgængelige dage: " + tilbud.getTilgængeligedage()
+                + "<br>" + "Beskrivelse: " + tilbud.getBeskrivelse()
+
+                + "<br><br><b><u>Køreskole: </u></b>"
+                + "<br>" + "Køreskolenavn: " +  køreskole.getNavn()
+                + "<br>" + "Køreskole adresse: " + køreskole.getAdresse()
+                + "<br>" + "Postnr: " +  køreskole.getPostnummer()
+                + "<br>" + "Telefon: " + køreskole.getTelefonnummer()
+                + "<br>" + "E-mail: " + køreskole.getEmail();
     }
+
+
+    public String lynKursusChecker() {
+        String lynKursus = "Ja";
+        String notLynKursus = "Nej";
+        if (tilbud.getLynkursus() == 0)
+            return notLynKursus;
+        return lynKursus;
+    }
+
 
     @Override
     public int describeContents() {
