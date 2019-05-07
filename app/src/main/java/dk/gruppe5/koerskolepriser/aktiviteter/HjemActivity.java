@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
 import dk.gruppe5.koerskolepriser.APIService;
+import dk.gruppe5.koerskolepriser.DataFetcher;
+import dk.gruppe5.koerskolepriser.OnDataListener;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.RestHandler;
 import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
@@ -125,7 +127,8 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
             søgning.setKørekort_type(sp_type.getSelectedItem().toString());
-            søgning.setPostnummer(Integer.parseInt(etxt_post.getText().toString()));
+            if (etxt_post.getText().length() > 0)
+                søgning.setPostnummer(Integer.parseInt(etxt_post.getText().toString()));
             søgning.setPris(Integer.parseInt(sp_pris.getSelectedItem().toString()));
             if (layout_extra.getVisibility() != View.GONE){
                 søgning.setAvanceret(true);
@@ -136,41 +139,17 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
             }
 
-            Retrofit klient = APIKlient.getKlient();
-
-            APIService apiService = klient.create(APIService.class);
-
-            Single<PakkeTilbud[]> tilbud = apiService.getAlleTilbudData();
-
-            tilbud.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new SingleObserver<PakkeTilbud[]>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onSuccess(PakkeTilbud[] pakkeTilbuds) {
-                            visSøgning(pakkeTilbuds);
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-
-                        }
-                    });
-
-            /*AsyncTask task = new AsyncTask() {
+            DataFetcher.getInstance().søgEfterTilbud(søgning, new OnDataListener() {
                 @Override
-                protected Object doInBackground(Object[] objects) {
-                    return RestHandler.getTilbudSomMatcher(søgning);
+                public void onSuccess(PakkeTilbud[] pakkeTilbud) {
+                    visSøgning(pakkeTilbud);
                 }
+
                 @Override
-                protected void onPostExecute(Object o) {
-                    visSøgning((PakkeTilbud[]) o);
+                public void onError(Throwable e) {
+
                 }
-            }.execute();*/
+            });
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);
