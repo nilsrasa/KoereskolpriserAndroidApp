@@ -97,22 +97,29 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
 
     private void dagChecker() {
 
-        int[] arr = {0,0,0,0,0,0,0};
+        int[] arr = new int[7];
 
         if (man.isChecked())
             arr[0] = 1;
+        else arr[0] = 0;
         if (tir.isChecked())
             arr[1] = 1;
+        else arr[1] = 0;
         if (ons.isChecked())
             arr[2] = 1;
+        else arr[2] = 0;
         if (tor.isChecked())
             arr[3] = 1;
+        else arr[3] = 0;
         if (fre.isChecked())
             arr[4] = 1;
+        else arr[4] = 0;
         if (lør.isChecked())
             arr[5] = 1;
+        else arr[5] = 0;
         if (søn.isChecked())
             arr[6] = 1;
+        else arr[6] = 0;
 
 
         for (int i=0; i<arr.length; i++) {

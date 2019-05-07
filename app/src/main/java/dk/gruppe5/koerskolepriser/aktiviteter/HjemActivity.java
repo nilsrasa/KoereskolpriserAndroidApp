@@ -154,9 +154,5 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
         }
-        else if (view.getId() == R.id.btn_hjem_testtest) {
-            Intent i = new Intent(this, TESTTETT.class);
-            startActivity(i);
-        }
     }
 }

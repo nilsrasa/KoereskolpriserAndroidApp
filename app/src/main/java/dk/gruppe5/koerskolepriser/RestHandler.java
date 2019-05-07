@@ -17,7 +17,8 @@ import okhttp3.Response;
 public class RestHandler {
 
     private static final String URL = "http://10.0.2.2:8080/koereskole_REST/webresources/generic/",
-    ALLE_TILBUD = "getAlleTilbud";
+    ALLE_TILBUD = "getAlleTilbud",
+    OPRET_TILBUD = "opretTilbud";
 
     public static PakkeTest[] getAlleTilbud(){
         OkHttpClient client = new OkHttpClient();
@@ -51,6 +52,14 @@ public class RestHandler {
 
 
         return matchs.toArray(new PakkeTest[0]);
+    }
+
+    public static PakkeTest[] opretTilbud() {
+        OkHttpClient client = new OkHttpClient();
+
+
+
+        return null;
     }
 
 }
