@@ -20,6 +20,7 @@ import dk.gruppe5.koerskolepriser.DataFetcher;
 import dk.gruppe5.koerskolepriser.OnDataListener;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.RestHandler;
+import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
 import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import io.reactivex.Scheduler;
@@ -71,8 +72,9 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         sp_type.setAdapter(adapter);
 
         sp_pris = findViewById(R.id.sp_hjem_pris);//Pris
-        adapter = ArrayAdapter.createFromResource(this,
-                R.array.priser, android.R.layout.simple_spinner_item);
+        adapter = new PrisAdapter<CharSequence>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.priser));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_pris.setAdapter(adapter);
 
