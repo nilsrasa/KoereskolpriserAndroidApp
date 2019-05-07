@@ -3,6 +3,7 @@ package dk.gruppe5.koerskolepriser;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.gruppe5.koerskolepriser.listeners.OnDataFetchedListener;
 import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import io.reactivex.Single;
@@ -23,7 +24,7 @@ public class DataFetcher {
         apiService = APIKlient.getKlient().create(APIService.class);
     }
 
-    public void hentAlleTilbud(final OnDataListener listener) {
+    public void hentAlleTilbud(final OnDataFetchedListener listener) {
         Single<PakkeTilbud[]> tilbud = apiService.getAlleTilbudData();
 
         tilbud.subscribeOn(Schedulers.io())
@@ -46,7 +47,7 @@ public class DataFetcher {
                 });
     }
 
-    public void søgEfterTilbud(final Soegning søgning, final OnDataListener listener){
+    public void søgEfterTilbud(final Soegning søgning, final OnDataFetchedListener listener){
         Single<PakkeTilbud[]> tilbud = apiService.getAlleTilbudData();
 
         tilbud.subscribeOn(Schedulers.io())
