@@ -6,13 +6,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
-import io.reactivex.Single;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import retrofit2.Retrofit;
 
 public class RestHandler {
 
@@ -20,7 +18,7 @@ public class RestHandler {
     ALLE_TILBUD = "getAlleTilbud",
     OPRET_TILBUD = "opretTilbud";
 
-    public static PakkeTilbud[] getAlleTilbud(){
+    public static TilbudTilBruger[] getAlleTilbud(){
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -31,7 +29,7 @@ public class RestHandler {
 
         try {
             response = client.newCall(request).execute();
-            return new Gson().fromJson(response.body().string(), PakkeTilbud[].class);
+            return new Gson().fromJson(response.body().string(), TilbudTilBruger[].class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -39,22 +37,22 @@ public class RestHandler {
         return null;
     }
 
-    public static PakkeTilbud[] getTilbudSomMatcher(Soegning søgning){
-        List<PakkeTilbud> matchs = new ArrayList<>();
-        PakkeTilbud[] pakker = getAlleTilbud();
+    public static TilbudTilBruger[] getTilbudSomMatcher(Soegning søgning){
+        List<TilbudTilBruger> matchs = new ArrayList<>();
+        TilbudTilBruger[] pakker = getAlleTilbud();
 
         if (pakker != null){
-            for (PakkeTilbud pakke:pakker){
+            for (TilbudTilBruger pakke:pakker){
                 if (søgning.matcher(pakke))
                     matchs.add(pakke);
             }
         }
 
 
-        return matchs.toArray(new PakkeTilbud[0]);
+        return matchs.toArray(new TilbudTilBruger[0]);
     }
 
-    public static PakkeTilbud[] opretTilbud() {
+    public static TilbudTilBruger[] opretTilbud() {
         OkHttpClient client = new OkHttpClient();
 
 

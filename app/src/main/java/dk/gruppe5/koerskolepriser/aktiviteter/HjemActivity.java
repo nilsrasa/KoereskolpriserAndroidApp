@@ -18,7 +18,7 @@ import dk.gruppe5.koerskolepriser.DataFetcher;
 import dk.gruppe5.koerskolepriser.listeners.OnDataFetchedListener;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
-import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import retrofit2.Retrofit;
 
@@ -103,7 +103,7 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         retrofit = APIKlient.getKlient();
     }
 
-    public void visSøgning(PakkeTilbud[] pakker){
+    public void visSøgning(TilbudTilBruger[] pakker){
         Intent intent = new Intent(this, SoegelisteActivity.class);
         intent.putExtra("tilbud", pakker);
         startActivity(intent);
@@ -144,8 +144,8 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onSuccess(PakkeTilbud[] pakkeTilbud) {
-        visSøgning(pakkeTilbud);
+    public void onSuccess(TilbudTilBruger[] tilbudTilBruger) {
+        visSøgning(tilbudTilBruger);
     }
 
     @Override

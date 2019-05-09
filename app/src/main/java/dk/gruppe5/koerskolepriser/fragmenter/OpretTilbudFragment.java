@@ -15,10 +15,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
-import dk.gruppe5.koerskolepriser.APIService;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
-import retrofit2.Call;
 import retrofit2.Retrofit;
 
 public class OpretTilbudFragment extends Fragment implements View.OnClickListener {

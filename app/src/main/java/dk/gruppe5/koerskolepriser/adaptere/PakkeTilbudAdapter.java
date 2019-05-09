@@ -11,13 +11,13 @@ import android.widget.TextView;
 import java.util.List;
 
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 
 public class PakkeTilbudAdapter extends BaseAdapter {
     private Context context;
-    private List<PakkeTilbud> pakkeListe;
+    private List<TilbudTilBruger> pakkeListe;
 
-    public PakkeTilbudAdapter (Context context, List<PakkeTilbud> pakkeListe){
+    public PakkeTilbudAdapter (Context context, List<TilbudTilBruger> pakkeListe){
         this.context = context;
         this.pakkeListe = pakkeListe;
     }
@@ -39,7 +39,7 @@ public class PakkeTilbudAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroupt) {
-        PakkeTilbud pakke = (PakkeTilbud) getItem(i);
+        TilbudTilBruger pakke = (TilbudTilBruger) getItem(i);
 
         if (view == null){
             LayoutInflater inflater = (LayoutInflater) context

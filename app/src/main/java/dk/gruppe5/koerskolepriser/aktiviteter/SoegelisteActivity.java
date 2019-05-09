@@ -12,14 +12,14 @@ import java.util.List;
 
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.adaptere.PakkeTilbudAdapter;
-import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 
 public class SoegelisteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ImageButton img_btn_tilbage;
     private ListView listView;
 
-    private List<PakkeTilbud> pakker = new ArrayList<>();
+    private List<TilbudTilBruger> pakker = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,7 @@ public class SoegelisteActivity extends AppCompatActivity implements View.OnClic
 
         if (parcelables != null) {
             for (Parcelable parcelable : parcelables) {
-                pakker.add((PakkeTilbud) parcelable);
+                pakker.add((TilbudTilBruger) parcelable);
             }
         }
 

@@ -129,9 +129,9 @@ public class Soegning implements Parcelable{
         return tom;
     }
 
-    public boolean matcher(PakkeTilbud pakke){
+    public boolean matcher(TilbudTilBruger pakke){
         boolean matcher;
-        TilbudTilBruger tilbud = pakke.getTilbud();
+        Tilbud tilbud = pakke.getTilbud();
 
         matcher = (getKørekort_type().equals("Alle") ||
                 tilbud.getKørekort_type().equals(getKørekort_type()));

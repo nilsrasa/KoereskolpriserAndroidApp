@@ -1,10 +1,10 @@
 package dk.gruppe5.koerskolepriser.listeners;
 
-import dk.gruppe5.koerskolepriser.objekter.PakkeTilbud;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 
 public interface OnDataFetchedListener {
 
-    void onSuccess(PakkeTilbud[] pakkeTilbud);
+    void onSuccess(TilbudTilBruger[] tilbudTilBruger);
 
     void onError(Throwable e);
 }
