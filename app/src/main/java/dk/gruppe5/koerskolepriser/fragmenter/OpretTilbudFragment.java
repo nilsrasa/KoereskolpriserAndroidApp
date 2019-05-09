@@ -14,8 +14,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import dk.gruppe5.koerskolepriser.APIKlient;
+import dk.gruppe5.koerskolepriser.APIService;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 public class OpretTilbudFragment extends Fragment implements View.OnClickListener {
 
@@ -27,6 +31,7 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
     private Button opret_btn;
     private Tilbud tilbud;
     private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse;
+    Retrofit retrofit;
 
 
     @Override
@@ -91,6 +96,8 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
 
         //Tilbud instantiering
         tilbud = new Tilbud();
+
+        retrofit = APIKlient.getKlient();
 
         return v;
     }
@@ -159,26 +166,43 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
             }
     }
 
+
+    final String brugernavn = "s175132";
+    final String password = "DS2019";
+
+    private void opretTilbud() {} {
+        /*Tilbud tilbud = new Tilbud(
+                brugernavn
+                        + password
+                        + brugernavn
+                        + sp_pris.getSelectedItem().toString()
+                        + sp_type.getSelectedItem().toString()
+                        + lynChecker()
+                        + koenChecker()
+                        + sp_mærke.getSelectedItem().toString()
+                        + sp_størrelse.getSelectedItem().toString()
+                        + koenChecker()
+                        + dagChecker();
+                        + id );
+        */
+
+        //Call<Tilbud> send = APIService.opretTilbud;
+
+    }
+
+
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_opretTilbud) {
 
             System.out.println(sp_type.getSelectedItem().toString());
-
             postNrChecker();
-
             System.out.println(sp_pris.getSelectedItem().toString());
-
             lynChecker();
-
             koenChecker();
-
             System.out.println(sp_mærke.getSelectedItem().toString());
-
             System.out.println(sp_størrelse.getSelectedItem().toString());
-
             dagChecker();
-
         } else if (view.getId() == R.id.txt_opretTilbud_filtre) {
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
