@@ -1,5 +1,7 @@
 package dk.gruppe5.koerskolepriser;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -15,6 +17,7 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.HttpException;
 
 public class DataFetcher {
     private static final DataFetcher INSTANCE = new DataFetcher();
@@ -47,6 +50,9 @@ public class DataFetcher {
                     @Override
                     public void onError(Throwable e) {
                         listener.onError(e);
+                        HttpException response = (HttpException)e;
+                        int code = response.code();
+                        Log.d("HTTP status code", "HTTP status code: " + code);
                     }
                 });
     }

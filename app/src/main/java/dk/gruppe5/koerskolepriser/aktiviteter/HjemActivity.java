@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,6 +21,7 @@ import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 
 public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnDataFetchedListener {
@@ -150,6 +152,8 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onError(Throwable e) {
-        e.printStackTrace();
+        HttpException response = (HttpException)e;
+        int code = response.code();
+        Log.d("HTTP status code", "HTTP status code: " + code);
     }
 }

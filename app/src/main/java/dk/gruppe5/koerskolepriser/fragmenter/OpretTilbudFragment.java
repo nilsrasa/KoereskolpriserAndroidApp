@@ -2,8 +2,11 @@ package dk.gruppe5.koerskolepriser.fragmenter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +18,17 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
+import dk.gruppe5.koerskolepriser.DataFetcher;
 import dk.gruppe5.koerskolepriser.R;
+import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
+import dk.gruppe5.koerskolepriser.aktiviteter.LoggetIndActivity;
+import dk.gruppe5.koerskolepriser.listeners.OnDataSentListener;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
+import dk.gruppe5.koerskolepriser.objekter.Tilgaengeligedage;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 
-public class OpretTilbudFragment extends Fragment implements View.OnClickListener {
+public class OpretTilbudFragment extends Fragment implements View.OnClickListener, OnDataSentListener {
 
     private TextView txt_filtre;
     private EditText etxt_post;
@@ -59,8 +68,9 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         sp_type.setAdapter(adapter);
 
         sp_pris = v.findViewById(R.id.sp_opret_pris);//Pris
-        adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.priser, android.R.layout.simple_spinner_item);
+        adapter = new PrisAdapter<CharSequence>(getContext(),
+                android.R.layout.simple_spinner_item,
+                getContext().getResources().getStringArray(R.array.priser));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_pris.setAdapter(adapter);
 
@@ -152,16 +162,17 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    private void koenChecker() {
-            if (cbox_mand.isChecked() && cbox_kvinde.isChecked()) {
-                System.out.println("mand og kvinde");
-            } else if (cbox_kvinde.isChecked()) {
-                System.out.println("kvinde");
-            } else if (cbox_mand.isChecked()) {
-                System.out.println("mand");
-            } else if (!cbox_mand.isChecked() && !cbox_kvinde.isChecked()) {
-                System.out.println("andet");
-            }
+    private String koenChecker() {
+        String s;
+
+        if (cbox_mand.isChecked() && cbox_kvinde.isChecked()) {
+            return "mand og kvinde";
+        } else if (cbox_kvinde.isChecked()) {
+            return ("kvinde");
+        } else if (cbox_mand.isChecked()) {
+            return ("mand");}
+            else
+                return "andet";
     }
 
 
@@ -185,7 +196,6 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         */
 
         //Call<Tilbud> send = APIService.opretTilbud;
-
     }
 
 
@@ -193,18 +203,43 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         if (view.getId() == R.id.btn_opretTilbud) {
 
-            System.out.println(sp_type.getSelectedItem().toString());
-            postNrChecker();
-            System.out.println(sp_pris.getSelectedItem().toString());
-            lynChecker();
-            koenChecker();
-            System.out.println(sp_mærke.getSelectedItem().toString());
-            System.out.println(sp_størrelse.getSelectedItem().toString());
-            dagChecker();
+            Tilbud tilbud = new Tilbud();
+            Tilgaengeligedage tilgaengeligedage = new Tilgaengeligedage();
+
+            tilgaengeligedage.setTilgangelig_mandag(man.isChecked()?1:0);
+            tilgaengeligedage.setTilgangelig_tirsdag(tir.isChecked()?1:0);
+            tilgaengeligedage.setTilgangelig_onsdag(ons.isChecked()?1:0);
+            tilgaengeligedage.setTilgangelig_torsdag(tor.isChecked()?1:0);
+            tilgaengeligedage.setTilgangelig_fredag(fre.isChecked()?1:0);
+            tilgaengeligedage.setTilgangelig_lordag(lør.isChecked()?1:0);
+            tilgaengeligedage.setTilgangelig_sondag(søn.isChecked()?1:0);
+
+            tilbud.setKørekort_type(sp_type.getSelectedItem().toString());
+            tilbud.setPris(Integer.parseInt(sp_pris.getSelectedItem().toString()));
+            tilbud.setLynkursus(cbox_lyn.isChecked()?1:0);
+            tilbud.setKøn(koenChecker());
+            tilbud.setMærke(sp_mærke.getSelectedItem().toString());
+            tilbud.setStørrelse(sp_størrelse.getSelectedItem().toString());
+            tilbud.setTilgængeligedage(tilgaengeligedage);
+
+            DataFetcher.getInstance().opretTilbud(tilbud,brugernavn, password, this);
+
         } else if (view.getId() == R.id.txt_opretTilbud_filtre) {
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
         }
 
+    }
+
+    @Override
+    public void onSuccess(String[] strings) {
+        ((LoggetIndActivity)getActivity()).restartFragment();
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        HttpException response = (HttpException)e;
+        int code = response.code();
+        Log.d("HTTP status code", "HTTP status code: " + code);
     }
 }

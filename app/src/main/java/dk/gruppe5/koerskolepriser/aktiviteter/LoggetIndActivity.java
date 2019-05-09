@@ -2,6 +2,7 @@ package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -77,6 +78,13 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
 
         return indlæsFragment(fragment);
     }
+
+    public void restartFragment() {
+        // Reload current fragment
+        getSupportFragmentManager().popBackStack();
+        indlæsFragment(new OpretTilbudFragment());
+    }
+
 
     @Override
     public void onBackPressed() {

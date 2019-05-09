@@ -21,6 +21,6 @@ public interface APIService {
     Single<String[]> opretTilbud(@Body String[] string);
 
     @PUT("webresources/generic/opretTilbud")
-    Single<Tilbud> opdaterTilbud(String brugernavn, String password, @Body Tilbud tilbud);
+    Single<Tilbud> opdaterTilbud(@Body String[] string);
 
 }
