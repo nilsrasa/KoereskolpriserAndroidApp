@@ -152,8 +152,6 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onError(Throwable e) {
-        HttpException response = (HttpException)e;
-        int code = response.code();
-        Log.d("HTTP status code", "HTTP status code: " + code);
+        e.printStackTrace();
     }
 }

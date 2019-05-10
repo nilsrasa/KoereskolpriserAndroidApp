@@ -50,9 +50,7 @@ public class DataFetcher {
                     @Override
                     public void onError(Throwable e) {
                         listener.onError(e);
-                        HttpException response = (HttpException)e;
-                        int code = response.code();
-                        Log.d("HTTP status code", "HTTP status code: " + code);
+                        e.printStackTrace();
                     }
                 });
     }

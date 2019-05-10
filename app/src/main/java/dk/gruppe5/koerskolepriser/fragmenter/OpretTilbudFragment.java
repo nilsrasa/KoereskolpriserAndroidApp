@@ -21,6 +21,7 @@ import dk.gruppe5.koerskolepriser.APIKlient;
 import dk.gruppe5.koerskolepriser.DataFetcher;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
+import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter_Opret;
 import dk.gruppe5.koerskolepriser.aktiviteter.LoggetIndActivity;
 import dk.gruppe5.koerskolepriser.listeners.OnDataSentListener;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
@@ -31,7 +32,7 @@ import retrofit2.Retrofit;
 public class OpretTilbudFragment extends Fragment implements View.OnClickListener, OnDataSentListener {
 
     private TextView txt_filtre;
-    private EditText etxt_post;
+    private EditText beskrivelse;
     private View layout_extra;
     private CheckBox cbox_mand, cbox_kvinde, cbox_lyn;
     private CheckBox man, tir, ons, tor, fre, lør, søn;
@@ -58,31 +59,31 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         txt_filtre.setText(content);
 
         //EditText
-        etxt_post = v.findViewById(R.id.etxt_opret_post);
+        beskrivelse = v.findViewById(R.id.etxt_opret_beskrivelse);
 
         //Spinners
         sp_type = v.findViewById(R.id.sp_opret_type);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.kørekort_typer, android.R.layout.simple_spinner_item);
+                R.array.kørekort_typer_opret, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
 
         sp_pris = v.findViewById(R.id.sp_opret_pris);//Pris
-        adapter = new PrisAdapter<CharSequence>(getContext(),
+        adapter = new PrisAdapter_Opret<CharSequence>(getContext(),
                 android.R.layout.simple_spinner_item,
-                getContext().getResources().getStringArray(R.array.priser));
+                getContext().getResources().getStringArray(R.array.priser_opret));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_pris.setAdapter(adapter);
 
         sp_mærke = v.findViewById(R.id.sp_opret_maerke);//Mærke
         adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.mærker, android.R.layout.simple_spinner_item);
+                R.array.mærker_opret, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_mærke.setAdapter(adapter);
 
         sp_størrelse = v.findViewById(R.id.sp_opret_stoerrelse);//Størrelse
         adapter = ArrayAdapter.createFromResource(getContext(),
-                R.array.sørrelse, android.R.layout.simple_spinner_item);
+                R.array.sørrelse_opret, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_størrelse.setAdapter(adapter);
 
@@ -142,16 +143,6 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
         }
         System.out.println();
 
-    }
-
-    private void postNrChecker() {
-        if (etxt_post.getText().length() > 4) {
-            etxt_post.setError("Et dansk postnummer er på 4 cifre!");
-        } else if (etxt_post.getText().length() == 0) {
-            etxt_post.setError("Skriv et postnummer");
-        } else if (etxt_post.getText().length() == 4) {
-            System.out.println(etxt_post.getText().toString());
-        }
     }
 
     private void lynChecker() {
@@ -221,6 +212,7 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
             tilbud.setMærke(sp_mærke.getSelectedItem().toString());
             tilbud.setStørrelse(sp_størrelse.getSelectedItem().toString());
             tilbud.setTilgængeligedage(tilgaengeligedage);
+            tilbud.setBeskrivelse(beskrivelse.getText().toString());
 
             DataFetcher.getInstance().opretTilbud(tilbud,brugernavn, password, this);
 
@@ -238,8 +230,6 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onError(Throwable e) {
-        HttpException response = (HttpException)e;
-        int code = response.code();
-        Log.d("HTTP status code", "HTTP status code: " + code);
+        e.printStackTrace();
     }
 }
