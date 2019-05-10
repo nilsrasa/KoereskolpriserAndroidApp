@@ -1,7 +1,7 @@
 package dk.gruppe5.koerskolepriser;
 
-import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
+import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import io.reactivex.Single;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -11,7 +11,7 @@ import retrofit2.http.Path;
 
 public interface APIService {
 
-    @GET("webresources/generic/getAlleTilbud")
+    @GET("webresources/generic/alleTilbud")
     Single<TilbudTilBruger[]> getAlleTilbudData();
 
     @POST("webresources/generic/tilbudMedGiventPostnummer/{postnummer}")
