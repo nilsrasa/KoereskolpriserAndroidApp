@@ -4,14 +4,20 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import dk.gruppe5.koerskolepriser.DataFetcher;
+import dk.gruppe5.koerskolepriser.MinData;
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.aktiviteter.LoggetIndActivity;
+import dk.gruppe5.koerskolepriser.listeners.OnDataSentListener;
+import dk.gruppe5.koerskolepriser.listeners.OnKoereskoleTilbudListener;
+import dk.gruppe5.koerskolepriser.objekter.Tilbud;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, OnDataSentListener, OnKoereskoleTilbudListener {
 
     private EditText brugernavn, password;
     private Button loginKnap;
@@ -33,15 +39,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if (view == loginKnap) {
-            Intent i = new Intent(this, LoggetIndActivity.class);
-            startActivity(i);
+            login(brugernavn.getText().toString(), password.getText().toString());
         }
     }
 
 
     private void login(String brugernavn, String password) {
-        if (!validering(brugernavn, password)) {
-
+        if (validering(brugernavn, password)) {
+            DataFetcher.getInstance().login(brugernavn, password, this);
         }
     }
 
@@ -62,5 +67,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             valid = false;
         }
         return valid;
+    }
+
+    @Override
+    public void onSuccess(String[] strings) {
+        MinData.getInstance().setBrugernavn(brugernavn.getText().toString());
+        MinData.getInstance().setPassword(password.getText().toString());
+
+        DataFetcher.getInstance().hentKøreskoleTilbud(brugernavn.getText().toString(),
+                password.getText().toString(), this);
+    }
+
+    @Override
+    public void onSuccess(Tilbud[] tilbuds) {
+        MinData.getInstance().setTilbuds(tilbuds);
+
+        Intent i = new Intent(this, LoggetIndActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        Log.e("LoginSIDE", e.toString());
+        Toast.makeText(this, "Fejl ved login ", Toast.LENGTH_SHORT).show();
     }
 }

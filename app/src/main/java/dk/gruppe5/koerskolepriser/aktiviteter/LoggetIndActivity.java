@@ -2,7 +2,6 @@ package dk.gruppe5.koerskolepriser.aktiviteter;
 
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +9,7 @@ import android.transition.AutoTransition;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import dk.gruppe5.koerskolepriser.MinData;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.fragmenter.OpretTilbudFragment;
 import dk.gruppe5.koerskolepriser.fragmenter.ProfilFragment;
@@ -17,8 +17,7 @@ import dk.gruppe5.koerskolepriser.fragmenter.dummy.DummyContent;
 import dk.gruppe5.koerskolepriser.fragmenter.MineTilbudFragment;
 
 
-public class LoggetIndActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
-                                                MineTilbudFragment.OnListFragmentInteractionListener {
+public class LoggetIndActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     private static final String TAG = "LoggetIndSide";
 
@@ -92,8 +91,9 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
     }
 
     @Override
-    public void onListFragmentInteraction (DummyContent.DummyItem item){
-
+    protected void onDestroy() {
+        MinData.getInstance().ryd();
+        super.onDestroy();
     }
 }
 

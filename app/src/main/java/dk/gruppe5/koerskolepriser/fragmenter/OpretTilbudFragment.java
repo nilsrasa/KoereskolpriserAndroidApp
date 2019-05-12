@@ -2,11 +2,8 @@ package dk.gruppe5.koerskolepriser.fragmenter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +16,13 @@ import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
 import dk.gruppe5.koerskolepriser.DataFetcher;
+import dk.gruppe5.koerskolepriser.MinData;
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
 import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter_Opret;
 import dk.gruppe5.koerskolepriser.aktiviteter.LoggetIndActivity;
 import dk.gruppe5.koerskolepriser.listeners.OnDataSentListener;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
 import dk.gruppe5.koerskolepriser.objekter.Tilgaengeligedage;
-import retrofit2.HttpException;
 import retrofit2.Retrofit;
 
 public class OpretTilbudFragment extends Fragment implements View.OnClickListener, OnDataSentListener {
@@ -166,10 +162,6 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
                 return "andet";
     }
 
-
-    final String brugernavn = "s175132";
-    final String password = "DS2019";
-
     private void opretTilbud() {} {
         /*Tilbud tilbud = new Tilbud(
                 brugernavn
@@ -214,7 +206,9 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
             tilbud.setTilgængeligedage(tilgaengeligedage);
             tilbud.setBeskrivelse(beskrivelse.getText().toString());
 
-            DataFetcher.getInstance().opretTilbud(tilbud,brugernavn, password, this);
+            DataFetcher.getInstance().opretTilbud(tilbud,
+                    MinData.getInstance().getBrugernavn(),
+                    MinData.getInstance().getPassword(), this);
 
         } else if (view.getId() == R.id.txt_opretTilbud_filtre) {
             layout_extra.setVisibility(View.VISIBLE);

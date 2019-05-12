@@ -11,25 +11,26 @@ import android.widget.TextView;
 import java.util.List;
 
 import dk.gruppe5.koerskolepriser.R;
+import dk.gruppe5.koerskolepriser.objekter.Tilbud;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 
-public class PakkeTilbudAdapter extends BaseAdapter {
+public class TilbudAdapter extends BaseAdapter {
     private Context context;
-    private List<TilbudTilBruger> pakkeListe;
+    private List<Tilbud> tilbudListe;
 
-    public PakkeTilbudAdapter (Context context, List<TilbudTilBruger> pakkeListe){
+    public TilbudAdapter(Context context, List<Tilbud> tilbudListe){
         this.context = context;
-        this.pakkeListe = pakkeListe;
+        this.tilbudListe = tilbudListe;
     }
 
     @Override
     public int getCount() {
-        return pakkeListe.size();
+        return tilbudListe.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return pakkeListe.get(i);
+        return tilbudListe.get(i);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class PakkeTilbudAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroupt) {
-        TilbudTilBruger pakke = (TilbudTilBruger) getItem(i);
+        Tilbud tilbud = (Tilbud) getItem(i);
 
         if (view == null){
             LayoutInflater inflater = (LayoutInflater) context
@@ -49,7 +50,7 @@ public class PakkeTilbudAdapter extends BaseAdapter {
 
         TextView tv = view.findViewById(R.id.list_text);
 
-        tv.setText(Html.fromHtml(pakke.toString()));
+        tv.setText(Html.fromHtml(tilbud.toString()));
 
 
         return view;

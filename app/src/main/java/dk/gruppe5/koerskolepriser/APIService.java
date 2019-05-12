@@ -23,4 +23,9 @@ public interface APIService {
     @PUT("webresources/generic/opretTilbud")
     Single<Tilbud> opdaterTilbud(@Body String[] string);
 
+    @POST("webresources/generic/login")
+    Single<String> login(@Body String string);
+
+    @POST("webresources/generic/tilbudKoreskole")
+    Single<Tilbud[]> getKøreskoleTilbud(@Body String string);
 }

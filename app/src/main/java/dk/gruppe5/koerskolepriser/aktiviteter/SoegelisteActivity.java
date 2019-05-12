@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.adaptere.PakkeTilbudAdapter;
+import dk.gruppe5.koerskolepriser.adaptere.BrugerTilbudAdapter;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 
 public class SoegelisteActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,7 +41,7 @@ public class SoegelisteActivity extends AppCompatActivity implements View.OnClic
             }
         }
 
-        PakkeTilbudAdapter adapter = new PakkeTilbudAdapter(this, pakker);
+        BrugerTilbudAdapter adapter = new BrugerTilbudAdapter(this, pakker);
         listView.setAdapter(adapter);
     }
 

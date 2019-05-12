@@ -7,8 +7,9 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-import dk.gruppe5.koerskolepriser.listeners.OnDataFetchedListener;
+import dk.gruppe5.koerskolepriser.listeners.OnBrugerTilbudListener;
 import dk.gruppe5.koerskolepriser.listeners.OnDataSentListener;
+import dk.gruppe5.koerskolepriser.listeners.OnKoereskoleTilbudListener;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import dk.gruppe5.koerskolepriser.objekter.Tilbud;
@@ -17,7 +18,6 @@ import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.HttpException;
 
 public class DataFetcher {
     private static final DataFetcher INSTANCE = new DataFetcher();
@@ -31,7 +31,7 @@ public class DataFetcher {
         apiService = APIKlient.getKlient().create(APIService.class);
     }
 
-    public void hentAlleTilbud(final OnDataFetchedListener listener) {
+    public void hentAlleTilbud(final OnBrugerTilbudListener listener) {
         Single<TilbudTilBruger[]> tilbud = apiService.getAlleTilbudData();
 
         tilbud.subscribeOn(Schedulers.io())
@@ -55,7 +55,7 @@ public class DataFetcher {
                 });
     }
 
-    public void søgEfterTilbud(final Soegning søgning, final OnDataFetchedListener listener){
+    public void søgEfterTilbud(final Soegning søgning, final OnBrugerTilbudListener listener){
         Single<TilbudTilBruger[]> tilbud = apiService.getAlleTilbudData();
 
         tilbud.subscribeOn(Schedulers.io())
@@ -104,6 +104,55 @@ public class DataFetcher {
                     @Override
                     public void onSuccess(String[] strings) {
                         listener.onSuccess(strings);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onError(e);
+                    }
+                });
+    }
+
+    public void  login(String brugernavn, String password, final OnDataSentListener listener){
+        String s = brugernavn+" "+password;
+        final Single<String> single = apiService.login(s);
+
+        single.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<String>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(String string) {
+                        Log.d("HAHA", string);
+                        listener.onSuccess(new String[]{string});
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        listener.onError(e);
+                    }
+                });
+    }
+
+    public void  hentKøreskoleTilbud(String brugernavn, String password, final OnKoereskoleTilbudListener listener){
+        String s = brugernavn+" "+password;
+        final Single<Tilbud[]> single = apiService.getKøreskoleTilbud(s);
+
+        single.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Tilbud[]>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(Tilbud[] tilbuds) {
+                        listener.onSuccess(tilbuds);
                     }
 
                     @Override

@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -16,15 +15,14 @@ import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
 import dk.gruppe5.koerskolepriser.DataFetcher;
-import dk.gruppe5.koerskolepriser.listeners.OnDataFetchedListener;
+import dk.gruppe5.koerskolepriser.listeners.OnBrugerTilbudListener;
 import dk.gruppe5.koerskolepriser.R;
 import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
 import dk.gruppe5.koerskolepriser.objekter.Soegning;
-import retrofit2.HttpException;
 import retrofit2.Retrofit;
 
-public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnDataFetchedListener {
+public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnBrugerTilbudListener {
     //private Button btn_søg, btn_login;
     private TextView txt_filtre;
     private EditText etxt_post;
