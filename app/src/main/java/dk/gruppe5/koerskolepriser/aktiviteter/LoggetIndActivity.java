@@ -78,12 +78,6 @@ public class LoggetIndActivity extends AppCompatActivity implements BottomNaviga
         return indlæsFragment(fragment);
     }
 
-    public void restartFragment() {
-        // Reload current fragment
-        getSupportFragmentManager().popBackStack();
-        indlæsFragment(new OpretTilbudFragment());
-    }
-
 
     @Override
     public void onBackPressed() {

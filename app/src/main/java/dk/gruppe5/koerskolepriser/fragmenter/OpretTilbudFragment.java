@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.transition.AutoTransition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -186,7 +187,7 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         if (view.getId() == R.id.btn_opretTilbud) {
 
-            Tilbud tilbud = new Tilbud();
+            tilbud = new Tilbud();
             Tilgaengeligedage tilgaengeligedage = new Tilgaengeligedage();
 
             tilgaengeligedage.setTilgangelig_mandag(man.isChecked()?1:0);
@@ -219,7 +220,7 @@ public class OpretTilbudFragment extends Fragment implements View.OnClickListene
 
     @Override
     public void onSuccess(String[] strings) {
-        ((LoggetIndActivity)getActivity()).restartFragment();
+        MinData.getInstance().getAlleTilbud().add(tilbud);
     }
 
     @Override
