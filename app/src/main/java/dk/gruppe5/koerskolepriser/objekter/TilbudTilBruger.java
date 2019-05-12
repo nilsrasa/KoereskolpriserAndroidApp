@@ -53,15 +53,7 @@ public class TilbudTilBruger implements Parcelable {
     public String toString() {
 
         return "<b><u>Tilbud: </u></b>"
-                + "<br>" + "Kørekort: " + tilbud.getKørekort_type()
-                + "<br>" + "Pris: " + tilbud.getPris()
-                + "<br>" + "Lynkurs: " + lynKursusChecker()
-                + "<br>" + "Bilmærke: " + tilbud.getMærke()
-                + "<br>" + "Bilstørrelse: " + tilbud.getStørrelse()
-                + "<br>" + "Kørelærer køn: " + tilbud.getKøn()
-                + "<br>" + "Tilgængelige dage: " + tilbud.getTilgængeligedage()
-                + "<br>" + "Beskrivelse: " + tilbud.getBeskrivelse()
-
+                + tilbud.toString()
                 + "<br><br><b><u>Køreskole: </u></b>"
                 + "<br>" + "Køreskolenavn: " +  køreskole.getNavn()
                 + "<br>" + "Køreskole adresse: " + køreskole.getAdresse()

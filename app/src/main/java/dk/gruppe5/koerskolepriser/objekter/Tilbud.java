@@ -155,16 +155,13 @@ public class Tilbud implements Parcelable{
 
     @Override
     public String toString() {
-        return "Tilbud{" +
-                "køreskole_id='" + køreskole_id + '\'' +
-                ", pris='" + pris + '\'' +
-                ", kørekort_type='" + kørekort_type + '\'' +
-                ", lynkursus=" + lynkursus +
-                ", mærke='" + mærke + '\'' +
-                ", størrelse='" + størrelse + '\'' +
-                ", køn='" + køn + '\'' +
-                ", beskrivelse='" + beskrivelse + '\'' +
-                ", tilgængeligedage=" + tilgængeligedage.toString() +
-                '}';
+        return "<br>" + "Kørekort: " + getKørekort_type()
+                + "<br>" + "Pris: " + getPris()
+                + "<br>" + "Lynkurs: " + ((lynkursus == 1)? "Ja" : "Nej")
+                + "<br>" + "Bilmærke: " + getMærke()
+                + "<br>" + "Bilstørrelse: " + getStørrelse()
+                + "<br>" + "Kørelærer køn: " + getKøn()
+                + "<br>" + "Tilgængelige dage: " + getTilgængeligedage().toString()
+                + "<br>" + "Beskrivelse: " + getBeskrivelse();
     }
 }
