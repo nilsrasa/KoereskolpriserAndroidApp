@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,25 +14,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import dk.gruppe5.koerskolepriser.APIKlient;
-import dk.gruppe5.koerskolepriser.APIService;
+import dk.gruppe5.koerskolepriser.DataFetcher;
+import dk.gruppe5.koerskolepriser.listeners.OnBrugerTilbudListener;
 import dk.gruppe5.koerskolepriser.R;
-import dk.gruppe5.koerskolepriser.objekter.Soegning;
+import dk.gruppe5.koerskolepriser.adaptere.PrisAdapter;
 import dk.gruppe5.koerskolepriser.objekter.TilbudTilBruger;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import dk.gruppe5.koerskolepriser.objekter.Soegning;
 import retrofit2.Retrofit;
 
-public class HjemActivity extends AppCompatActivity implements View.OnClickListener {
+public class HjemActivity extends AppCompatActivity implements View.OnClickListener, OnBrugerTilbudListener {
     //private Button btn_søg, btn_login;
     private TextView txt_filtre;
     private EditText etxt_post;
     private View layout_extra;
-    private CheckBox cbox_mand, cbox_kvinde, cbox_lyn;
-    private Soegning søgning;
-    private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag;
+    private CheckBox cbox_lyn;
+    private Spinner sp_pris, sp_type, sp_mærke, sp_størrelse, sp_dag, sp_køn;
     private Retrofit retrofit;
 
     @Override
@@ -67,8 +62,9 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         sp_type.setAdapter(adapter);
 
         sp_pris = findViewById(R.id.sp_hjem_pris);//Pris
-        adapter = ArrayAdapter.createFromResource(this,
-                R.array.priser, android.R.layout.simple_spinner_item);
+        adapter = new PrisAdapter<CharSequence>(this,
+                android.R.layout.simple_spinner_item,
+                getResources().getStringArray(R.array.priser));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_pris.setAdapter(adapter);
 
@@ -90,19 +86,27 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_dag.setAdapter(adapter);
 
+        sp_køn = findViewById(R.id.sp_hjem_koen);//Køn
+        adapter = ArrayAdapter.createFromResource(this,
+                R.array.køn, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_køn.setAdapter(adapter);
+
         //Checkboxes
-        cbox_mand = findViewById(R.id.cbox_hjem_mand);
-        cbox_kvinde = findViewById(R.id.cbox_hjem_kvinde);
         cbox_lyn = findViewById(R.id.cbox_hjem_lyn);
 
         //Extra
         layout_extra = findViewById(R.id.layout_hjem_extra);
         layout_extra.setVisibility(View.GONE);
 
-        //Søgning instantiering
-        søgning = new Soegning();
-
+        //Retrofit
         retrofit = APIKlient.getKlient();
+    }
+
+    public void visSøgning(TilbudTilBruger[] pakker){
+        Intent intent = new Intent(this, SoegelisteActivity.class);
+        intent.putExtra("tilbud", pakker);
+        startActivity(intent);
     }
 
     @Override
@@ -112,63 +116,40 @@ public class HjemActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
         else if (view.getId() == R.id.btn_hjem_soeg){
-            /*søgning.setKørekort_type(sp_type.getSelectedItem().toString());
-            søgning.setPostnummer(etxt_post.getText().toString());
-            søgning.setPris(sp_pris.getSelectedItem().toString());
-            if (layout_extra.getVisibility() == View.GONE){
-                //Søg for std filtre
-            }
-            else {
+            Soegning søgning = new Soegning();
+
+            søgning.setKørekort_type(sp_type.getSelectedItem().toString());
+            if (etxt_post.getText().length() > 0)
+                søgning.setPostnummer(Integer.parseInt(etxt_post.getText().toString()));
+            if (!sp_pris.getSelectedItem().toString().equals("Alle"))
+                søgning.setPris(Integer.parseInt(sp_pris.getSelectedItem().toString()));
+            if (layout_extra.getVisibility() != View.GONE){
                 søgning.setAvanceret(true);
                 søgning.setLynkursus(cbox_lyn.isChecked());
-                søgning.setMand(cbox_mand.isChecked());
-                søgning.setKvinde(cbox_kvinde.isChecked());
+                søgning.setKøn(sp_køn.getSelectedItem().toString());
                 søgning.setMærke(sp_mærke.getSelectedItem().toString());
                 søgning.setStørrelse(sp_størrelse.getSelectedItem().toString());
                 søgning.setØnskedage(sp_dag.getSelectedItem().toString());
+            }
 
-                //Søg for alle filtre
-            }*/
-
-            //Opretter intent og vidersender søgning objektet til næste aktivitet
-            final Intent intent = new Intent(this, SoegelisteActivity.class);
-            //intent.putExtra("søgning", søgning);
-            //startActivity(intent);
-
-            // create an instance of the ApiService
-            APIService apiService = retrofit.create(APIService.class);
-            // make a request by calling the corresponding method
-            Single<TilbudTilBruger[]> person = apiService.getAlleTilbudData();
-            person.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<TilbudTilBruger[]>() {
-                @Override
-                public void onSubscribe(Disposable d) {
-
-                }
-
-                @Override
-                public void onSuccess(TilbudTilBruger[] tilbudTilBruger) {
-                    intent.putExtra("tilbud", tilbudTilBruger[0]);
-                    System.out.println(tilbudTilBruger[0].getPris());
-                    System.out.println(tilbudTilBruger[0].getBeskrivelse());
-                    System.out.println(tilbudTilBruger[0].getKøn());
-                    System.out.println(tilbudTilBruger[0].getKøreskole_id());
-                    System.out.println(tilbudTilBruger[0].getLynkursus());
-                    System.out.println(tilbudTilBruger[0].getMærke());
-                    System.out.println(tilbudTilBruger[0].getStørrelse());
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onError(Throwable e) {
-                    Log.d("testTag2","Er du dum?");
-                    e.printStackTrace();
-                }
-            });
+            if (!søgning.isTom())
+                DataFetcher.getInstance().søgEfterTilbud(søgning, this);
+            else
+                DataFetcher.getInstance().hentAlleTilbud(this);
         }
         else if (view.getId() == R.id.txt_hjem_filtre){
             layout_extra.setVisibility(View.VISIBLE);
             txt_filtre.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void onSuccess(TilbudTilBruger[] tilbudTilBruger) {
+        visSøgning(tilbudTilBruger);
+    }
+
+    @Override
+    public void onError(Throwable e) {
+        e.printStackTrace();
     }
 }

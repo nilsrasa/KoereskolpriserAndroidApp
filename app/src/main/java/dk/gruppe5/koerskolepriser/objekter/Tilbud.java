@@ -12,7 +12,7 @@ public class Tilbud implements Parcelable{
     private String køreskole_id;
     @Expose
     @SerializedName("pris")
-    private String pris;
+    private int pris;
     @Expose
     @SerializedName("korekort_type")
     private String kørekort_type;
@@ -29,11 +29,12 @@ public class Tilbud implements Parcelable{
     @SerializedName("kon")
     private String køn;
     @Expose
-    @SerializedName("tilgangeligeDage")
-    private String ønskedage;
+    @SerializedName("beskrivelse")
+    private String beskrivelse;
     @Expose
-    @SerializedName("id")
-    private int id;
+    @SerializedName("tilgangeligeDage")
+    private Tilgaengeligedage tilgængeligedage;
+
 
     public static final Creator<Tilbud> CREATOR = new Creator<Tilbud>() {
         @Override
@@ -49,17 +50,16 @@ public class Tilbud implements Parcelable{
 
     public Tilbud(){ }
 
-    public Tilbud(Parcel parcel){
+    protected Tilbud(Parcel parcel){
         this.køreskole_id = parcel.readString();
-        this.pris = parcel.readString();
+        this.pris = parcel.readInt();
         this.kørekort_type = parcel.readString();
-
         this.lynkursus = parcel.readInt();
         this.mærke = parcel.readString();
         this.størrelse = parcel.readString();
         this.køn = parcel.readString();
-        this.ønskedage = parcel.readString();
-        this.id = parcel.readInt();
+        this.beskrivelse = parcel.readString();
+        this.tilgængeligedage = parcel.readParcelable(Tilgaengeligedage.class.getClassLoader());
     }
 
     public String getKørekort_type() {
@@ -70,21 +70,6 @@ public class Tilbud implements Parcelable{
         this.kørekort_type = kørekort_type;
     }
 
-    public String getPris() {
-        return pris;
-    }
-
-    public void setPris(String pris) {
-        this.pris = pris;
-    }
-
-    public int isLynkursus() {
-        return lynkursus;
-    }
-
-    public void setLynkursus(int lynkursus) {
-        this.lynkursus = lynkursus;
-    }
 
     public String getMærke() {
         return mærke;
@@ -102,12 +87,52 @@ public class Tilbud implements Parcelable{
         this.størrelse = størrelse;
     }
 
-    public String getØnskedage() {
-        return ønskedage;
+    public String getKøreskole_id() {
+        return køreskole_id;
     }
 
-    public void setØnskedage(String ønskedage) {
-        this.ønskedage = ønskedage;
+    public void setKøreskole_id(String køreskole_id) {
+        this.køreskole_id = køreskole_id;
+    }
+
+    public int getLynkursus() {
+        return lynkursus;
+    }
+
+    public String getKøn() {
+        return køn;
+    }
+
+    public void setKøn(String køn) {
+        this.køn = køn;
+    }
+
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
+
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
+
+    public void setLynkursus(int lynkursus) {
+        this.lynkursus = lynkursus;
+    }
+
+    public Tilgaengeligedage getTilgængeligedage() {
+        return tilgængeligedage;
+    }
+
+    public void setTilgængeligedage(Tilgaengeligedage tilgængeligedage) {
+        this.tilgængeligedage = tilgængeligedage;
+    }
+
+    public int getPris() {
+        return pris;
+    }
+
+    public void setPris(int pris) {
+        this.pris = pris;
     }
 
     @Override
@@ -118,14 +143,25 @@ public class Tilbud implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(køreskole_id);
-        parcel.writeString(pris);
+        parcel.writeInt(pris);
         parcel.writeString(kørekort_type);
-
         parcel.writeInt(lynkursus);
         parcel.writeString(mærke);
         parcel.writeString(størrelse);
         parcel.writeString(køn);
-        parcel.writeString(ønskedage);
-        parcel.writeInt(id);
+        parcel.writeString(beskrivelse);
+        parcel.writeParcelable(tilgængeligedage,0);
+    }
+
+    @Override
+    public String toString() {
+        return "<br>" + "Kørekort: " + getKørekort_type()
+                + "<br>" + "Pris: " + getPris()
+                + "<br>" + "Lynkurs: " + ((lynkursus == 1)? "Ja" : "Nej")
+                + "<br>" + "Bilmærke: " + getMærke()
+                + "<br>" + "Bilstørrelse: " + getStørrelse()
+                + "<br>" + "Kørelærer køn: " + getKøn()
+                + "<br>" + "Tilgængelige dage: " + getTilgængeligedage().toString()
+                + "<br>" + "Beskrivelse: " + getBeskrivelse();
     }
 }

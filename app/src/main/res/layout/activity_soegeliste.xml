@@ -52,5 +52,6 @@
         android:id="@+id/lv_soegliste_liste"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 </android.support.constraint.ConstraintLayout>

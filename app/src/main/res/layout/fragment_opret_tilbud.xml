@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".aktiviteter.HjemActivity">
 
-    <TextView
-        android:id="@+id/txt_opret_titel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/find"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -43,20 +31,6 @@
             android:id="@+id/sp_opret_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/txt_opret_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/postnummer" />
-
-        <EditText
-            android:id="@+id/etxt_opret_post"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txt_opret_pris"
@@ -155,10 +129,135 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dage" />
 
-            <Spinner
-                android:id="@+id/sp_opret_dage"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvMan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Man" />
+
+                    <TextView
+                        android:id="@+id/tvTirs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Tir" />
+
+                    <TextView
+                        android:id="@+id/tvOns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Ons" />
+
+                    <TextView
+                        android:id="@+id/tvTors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Tor" />
+
+                    <TextView
+                        android:id="@+id/tvFre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Fre" />
+
+                    <TextView
+                        android:id="@+id/tvLør"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Lør" />
+
+                    <TextView
+                        android:id="@+id/tvSøn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="#000"
+                        android:text="Søn" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/cbMan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <CheckBox
+                        android:id="@+id/cbTirs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/cbOns"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/cbTors"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <CheckBox
+                        android:id="@+id/cbFre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <CheckBox
+                        android:id="@+id/cbLør"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+
+                    <CheckBox
+                        android:id="@+id/cbSøn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Beskrivelse"
+                    android:paddingTop="10dp"/>
+
+                <EditText
+                    android:id="@+id/etxt_opret_beskrivelse"
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:hint="Skriv en beskrivelse her..."/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

@@ -6,117 +6,71 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class TilbudTilBruger implements Parcelable{
+public class TilbudTilBruger implements Parcelable {
     @Expose
-    @SerializedName("koreskole_id")
-    private String køreskole_id;
+    @SerializedName("tilbud")
+    private Tilbud tilbud;
     @Expose
-    @SerializedName("pris")
-    private String pris;
-    @Expose
-    @SerializedName("korekort_type")
-    private String kørekort_type;
-    @Expose
-    @SerializedName("lynkursus")
-    private int lynkursus;
-    @Expose
-    @SerializedName("bilmarke")
-    private String mærke;
-    @Expose
-    @SerializedName("bilstorrelse")
-    private String størrelse;
-    @Expose
-    @SerializedName("kon")
-    private String køn;
-    @Expose
-    @SerializedName("beskrivelse")
-    private String beskrivelse;
+    @SerializedName("koreskole")
+    private Koereskole køreskole;
+
+    public TilbudTilBruger(){}
+
+    protected TilbudTilBruger(Parcel in) {
+        tilbud = in.readParcelable(Tilbud.class.getClassLoader());
+        køreskole = in.readParcelable(Koereskole.class.getClassLoader());
+    }
 
     public static final Creator<TilbudTilBruger> CREATOR = new Creator<TilbudTilBruger>() {
         @Override
-        public TilbudTilBruger createFromParcel(Parcel parcel) {
-            return new TilbudTilBruger(parcel);
+        public TilbudTilBruger createFromParcel(Parcel in) {
+            return new TilbudTilBruger(in);
         }
 
         @Override
-        public TilbudTilBruger[] newArray(int i) {
-            return new TilbudTilBruger[i];
+        public TilbudTilBruger[] newArray(int size) {
+            return new TilbudTilBruger[size];
         }
     };
 
-    public TilbudTilBruger(){ }
-
-    public TilbudTilBruger(Parcel parcel){
-        this.køreskole_id = parcel.readString();
-        this.pris = parcel.readString();
-        this.kørekort_type = parcel.readString();
-
-        this.lynkursus = parcel.readInt();
-        this.mærke = parcel.readString();
-        this.størrelse = parcel.readString();
-        this.køn = parcel.readString();
-        this.beskrivelse = parcel.readString();
+    public Tilbud getTilbud() {
+        return tilbud;
     }
 
-    public String getKørekort_type() {
-        return kørekort_type;
+    public void setTilbud(Tilbud tilbud) {
+        this.tilbud = tilbud;
     }
 
-    public void setKørekort_type(String kørekort_type) {
-        this.kørekort_type = kørekort_type;
+    public Koereskole getKøreskole() {
+        return køreskole;
     }
 
-    public String getPris() {
-        return pris;
+    public void setKøreskole(Koereskole køreskole) {
+        this.køreskole = køreskole;
     }
 
-    public void setPris(String pris) {
-        this.pris = pris;
+    @Override
+    public String toString() {
+
+        return "<b><u>Tilbud: </u></b>"
+                + tilbud.toString()
+                + "<br><br><b><u>Køreskole: </u></b>"
+                + "<br>" + "Køreskolenavn: " +  køreskole.getNavn()
+                + "<br>" + "Køreskole adresse: " + køreskole.getAdresse()
+                + "<br>" + "Postnr: " +  køreskole.getPostnummer()
+                + "<br>" + "Telefon: " + køreskole.getTelefonnummer()
+                + "<br>" + "E-mail: " + køreskole.getEmail();
     }
 
-    public String getMærke() {
-        return mærke;
+
+    public String lynKursusChecker() {
+        String lynKursus = "Ja";
+        String notLynKursus = "Nej";
+        if (tilbud.getLynkursus() == 0)
+            return notLynKursus;
+        return lynKursus;
     }
 
-    public void setMærke(String mærke) {
-        this.mærke = mærke;
-    }
-
-    public String getStørrelse() {
-        return størrelse;
-    }
-
-    public void setStørrelse(String størrelse) {
-        this.størrelse = størrelse;
-    }
-
-    public String getKøreskole_id() {
-        return køreskole_id;
-    }
-
-    public void setKøreskole_id(String køreskole_id) {
-        this.køreskole_id = køreskole_id;
-    }
-
-    public int getLynkursus() {
-        return lynkursus;
-    }
-
-    public String getKøn() {
-        return køn;
-    }
-
-    public void setKøn(String køn) {
-        this.køn = køn;
-    }
-
-    public String getBeskrivelse() {
-        return beskrivelse;
-    }
-
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
-    }
 
     @Override
     public int describeContents() {
@@ -124,15 +78,8 @@ public class TilbudTilBruger implements Parcelable{
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(køreskole_id);
-        parcel.writeString(pris);
-        parcel.writeString(kørekort_type);
-
-        parcel.writeInt(lynkursus);
-        parcel.writeString(mærke);
-        parcel.writeString(størrelse);
-        parcel.writeString(køn);
-        parcel.writeString(beskrivelse);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(tilbud, 0);
+        dest.writeParcelable(køreskole, 0);
     }
 }

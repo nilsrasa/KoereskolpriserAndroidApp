@@ -1,44 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="kørekort_typer">
+        <item>Alle</item>
         <item>AM</item>
         <item>A1</item>
         <item>A2</item>
         <item>A</item>
-        <item>B1</item>
         <item>B</item>
-        <item>C1</item>
-        <item>C</item>
-        <item>D1</item>
-        <item>D</item>
         <item>BE</item>
+        <item>B1</item>
+        <item>C1</item>
         <item>C1E</item>
+        <item>C</item>
         <item>CE</item>
+        <item>D1</item>
         <item>D1E</item>
+        <item>D</item>
+        <item>DE</item>
+    </string-array>
+
+    <string-array name="kørekort_typer_opret">
+        <item>AM</item>
+        <item>A1</item>
+        <item>A2</item>
+        <item>A</item>
+        <item>B</item>
+        <item>BE</item>
+        <item>B1</item>
+        <item>C1</item>
+        <item>C1E</item>
+        <item>C</item>
+        <item>CE</item>
+        <item>D1</item>
+        <item>D1E</item>
+        <item>D</item>
         <item>DE</item>
     </string-array>
 
     <string-array name="priser">
-        <item>8.000 - 10.000</item>
-        <item>10.000 - 12.000</item>
-        <item>12.000 - 14.000</item>
+        <item>Alle</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+    </string-array>
+
+    <string-array name="priser_opret">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
     </string-array>
 
     <string-array name="mærker">
-        <item>BMW</item>
+        <item>Alle</item>
+        <item>VW</item>
         <item>Audi</item>
-        <item>Toyota</item>
-        <item>Ford</item>
-        <item>Wolkswagen</item>
+        <item>Mercedes</item>
+        <item>Citroén</item>
+        <item>Honda</item>
+        <item>Opel</item>
+        <item>Peugeot</item>
+    </string-array>
+
+    <string-array name="mærker_opret">
+        <item>VW</item>
+        <item>Audi</item>
+        <item>Mercedes</item>
+        <item>Citroén</item>
+        <item>Honda</item>
+        <item>Opel</item>
+        <item>Peugeot</item>
     </string-array>
 
     <string-array name="sørrelse">
+        <item>Alle</item>
+        <item>Lille</item>
+        <item>Mellem</item>
+        <item>Stor</item>
+    </string-array>
+
+    <string-array name="sørrelse_opret">
         <item>Lille</item>
         <item>Mellem</item>
         <item>Stor</item>
     </string-array>
 
     <string-array name="ønskedage">
+        <item>Alle</item>
         <item>Mandag</item>
         <item>Tirsdag</item>
         <item>Onsdag</item>
@@ -47,4 +126,28 @@
         <item>Lørdag</item>
         <item>Søndag</item>
     </string-array>
+
+    <string-array name="ønskedage_opret">
+        <item>Mandag</item>
+        <item>Tirsdag</item>
+        <item>Onsdag</item>
+        <item>Torsdag</item>
+        <item>Fredag</item>
+        <item>Lørdag</item>
+        <item>Søndag</item>
+    </string-array>
+
+    <string-array name="køn">
+        <item>Begge</item>
+        <item>Kvinde</item>
+        <item>Mand</item>
+    </string-array>
+
+    <string-array name="køn_opret">
+        <item>Kvinde</item>
+        <item>Mand</item>
+    </string-array>
+
+
+
 </resources>
